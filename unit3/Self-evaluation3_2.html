@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>اختبار دمج التكنولوجيا في التعليم</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .lessoncalendaar1-box {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .flex-container {
+  display: block;
+}
+
+
+    .mcq-section, .tf-section {
+      flex: 1;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .mcq-section h4, .tf-section h4 {
+      color: #8e44ad;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .question {
+      margin-bottom: 10px;
+    }
+
+    .question p {
+      font-size: 11px;
+      margin: 3px 0;
+    }
+
+    .question label {
+      font-size: 10px;
+      display: block;
+      margin: 2px 0;
+    }
+
+    .submit-btn {
+      display: block;
+      margin: 20px auto 0;
+      padding: 8px 20px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 25px 35px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .modal-content button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .modal-content button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="lessoncalendaar1-box">
+  <div class="flex-container">
+    <div class="mcq-section">
+      <h4>أولا: أسئلة اختيار من متعدد</h4>
+      <div class="question">
+        <p> 1-	لنسخ سؤال داخل التقويم  في Google Formيتم اختر أمر......</p>
+        <label><input type="radio" name="q1" data-correct="true"> 1- Copy </label>
+        <label><input type="radio" name="q1" data-correct="false"> 2-Delete </label>
+        <label><input type="radio" name="q1" data-correct="false"> 3-Cut </label>
+        <label><input type="radio" name="q1" data-correct="false"> 4-Save</label>
+      </div>
+      <div class="question">
+        <p>2-	لحذف سؤال داخل التقويم  في Google Formيتم اختر أمر......  </p>
+        <label><input type="radio" name="q2" data-correct="false">  1- Copy </label>
+        <label><input type="radio" name="q2" data-correct="true">  2- Delete</label>
+        <label><input type="radio" name="q2" data-correct="false"> 3-Cut </label>
+        <label><input type="radio" name="q2" data-correct="false">  4-Remove </label>
+      </div>
+    </div>
+
+    <div class="tf-section">
+      <h4> ثانيا:أسئلة صواب وخطأ</h4>
+      <div class="question">
+        <p>  لإضافة أسئلة للاختبار في Google Formيتم اختيار أمر Add new   </p>
+        <label><input type="radio" name="q4" data-correct="true"> صواب</label>
+        <label><input type="radio" name="q4" data-correct="false"> خطأ</label>
+      </div>
+      <div class="question">
+        <p>  لتغيير مظهر التقويم. في Google Formيتم اختيار Theme   </p>
+        <label><input type="radio" name="q5" data-correct="true"> صواب</label>
+        <label><input type="radio" name="q5" data-correct="false"> خطأ</label>
+      </div>
+      <div class="question">
+        <p>   يستخدم امر Randomise optionsلترتيب الخيارات بشكل عشوائي في جوجل فورم    </p>
+        <label><input type="radio" name="q6" data-correct="true"> صواب</label>
+        <label><input type="radio" name="q6" data-correct="false"> خطأ</label>
+      </div>
+    </div>
+  </div>
+  <button class="submit-btn" onclick="calculateScore()">تسليم</button>
+</div>
+
+<script>
+function calculateScore() {
+  let totalQuestions = document.querySelectorAll('.question').length;
+  let correctAnswers = 0;
+  document.querySelectorAll('.question').forEach(q => {
+    let selected = q.querySelector('input[type="radio"]:checked');
+    if (selected && selected.getAttribute('data-correct') === 'true') {
+      correctAnswers++;
+    }
+  });
+  let percentage = (correctAnswers / totalQuestions) * 100;
+  if (percentage < 50) {
+    showModal("عليك دراسة محتوى الدرس، لقد حصلت على " + percentage.toFixed(0) + "%", () => {
+      localStorage.setItem("startLesson2", "true");
+      window.location.href = "https://educationalenvironment.github.io/Educational-environment2/module3.html"; // أو أي كلاس / صفحة   module1.html#lesson1_T1
+    });
+  } else {
+    showModal("ممتاز! لست بحاجة لدراسة الدرس، حصلت على " + percentage.toFixed(0) + "%", () => {
+     localStorage.setItem("startLesson", "lesson3");
+    window.location.href = "https://educationalenvironment.github.io/Educational-environment2/module3.html";// أو أي كلاس / صفحة
+    });
+  }
+}
+
+function showModal(message, callback) {
+  let modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.innerHTML = `<div class="modal-content">
+    <p>${message}</p>
+    <button onclick="closeModal()">إغلاق</button>
+  </div>`;
+  document.body.appendChild(modal);
+  window.closeModal = function() {
+    document.body.removeChild(modal);
+    callback();
+  }
+}
+</script>
+
+</body>
+</html>
