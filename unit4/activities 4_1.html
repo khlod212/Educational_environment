@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>صفحة الأنشطة التفاعلية</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+  /* ✅ تنسيقات عامة */
+body, html {
+  font-family: 'Cairo', sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* ✅ شريط علوي للمؤقت والمعلومات */
+#top-bar {
+  display: none; /* يُظهر عند بدء النشاط */
+  justify-content: space-between;
+  align-items: center;
+  background: #eee;
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-size: 16px;
+}
+
+
+/* ✅ شبكة الحروف */
+#grid {
+  display: grid;
+  grid-template-columns: repeat(11, 30px);
+  gap: 3px;
+  direction: rtl;
+  justify-content: center;
+}
+
+#grid input[type="text"]:not([disabled]) {
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  text-align: center;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+#grid input[disabled] {
+  background-color: #f8f8f8 !important;
+  border: none !important;
+  visibility: hidden !important;
+  cursor: default;
+}
+
+#grid input[type="text"]:focus {
+  outline: none;
+  border-color: #4a00e0;
+  box-shadow: 0 0 5px rgba(74,0,224,0.5);
+}
+
+/* ✅ الحروف القابلة للسحب */
+#letter-box {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.draggable-letter {
+  user-select: none;
+  width: 20px;
+  height: 30px;
+  background-color: #4a00e0;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: background-color 0.2s;
+}
+
+.draggable-letter:active {
+  cursor: grabbing;
+  background-color: #3800b0;
+}
+
+/* ✅ الأسئلة */
+ol {
+  padding-right: 20px;
+  font-size: 17px;
+  line-height: 1.7;
+  direction: rtl;
+  user-select: none;
+}
+
+/* ✅ زر التسليم */
+#submit-button {
+  display: none;
+  margin: 20px auto 0;
+  padding: 12px 25px;
+  font-size: 18px;
+  background-color: #4a00e0;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block;
+}
+
+#submit-button:hover {
+  background-color: #3800b0;
+}
+
+/* ✅ شارة التقييم */
+#badge-image {
+  display: none;
+  margin-top: 15px;
+  max-width: 100px;
+  user-select: none;
+}
+
+/* ✅ نموذج تسجيل الدخول */
+#form-container {
+  max-width: 400px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  direction: rtl;
+}
+
+#form-container h2 {
+  margin-bottom: 25px;
+  color: #0077aa;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+#form-container input[type="text"],
+#form-container input[type="email"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 18px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+#form-container input[type="text"]:focus,
+#form-container input[type="email"]:focus {
+  border-color: #0077aa;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,119,170,0.4);
+}
+
+#form-container button {
+  width: 100%;
+  padding: 12px 0;
+  background-color: #0077aa;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#form-container button:hover {
+  background-color: #005f80;
+}
+
+#form-container input::placeholder {
+  color: #999;
+}
+
+#form-container input:disabled,
+#form-container button:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+  color: #aaa;
+}
+
+/* ✅ النافذة المنبثقة (modal) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: zoomIn 0.3s ease-in-out;
+  font-family: 'Cairo', sans-serif;
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #333;
+}
+
+.modal-content button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #388e3c;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ✅ استجابة على الشاشات الصغيرة */
+@media (max-width: 768px) {
+  #grid {
+    grid-template-columns: repeat(11, 25px);
+    gap: 2px;
+  }
+
+  #grid input[type="text"]:not([disabled]) {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+
+  .draggable-letter {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+  }
+
+  .timer-circle {
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+  }
+
+  ol {
+    font-size: 15px;
+  }
+}
+
+
+    .questions {
+      width: 48%;
+      font-size: 18px;
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #ccc;
+    }
+
+    .inputs {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #ccc;
+    }
+
+    .row {
+      display: flex;
+      gap: 5px;
+    }
+
+    .input-box {
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    #score {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: green;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 6px 15px;
+      font-size: 16px;
+    }
+
+
+     .draggable-letter {
+    width: 20px;
+    height: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #2808df;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    font-size: 15px;
+    user-select: none;
+  }
+
+  .input-box {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 20px;
+  }
+
+    </style>
+</head>
+<body>
+
+<!-- ✅ الشريط العلوي -->
+<div class="top-bar" id="top-bar" style="display: none;">
+  <div id="user-name">👤 </div>
+  <div>النتيجة: <span id="score">0</span></div>
+  <div class="progress-icons">
+    <img id="check" src="✔️" style="display: none;" />
+    <img id="gold" src="✔️" style="display: none;" />
+    <img id="trophy" src="🏆" style="display: none;" />
+    <img id="badge-image" style="display: none;" />
+  </div>
+</div>
+
+<!-- ✅ النموذج -->
+<div class="container" id="form-container">
+  <h2>تسجيل الدخول</h2>
+  <input type="text" id="name" placeholder="الاسم" required />
+  <input type="email" id="email" placeholder="البريد الإلكتروني" required />
+  <button onclick="submitForm()">دخول</button>
+</div>
+
+<!-- ✅ النافذة المنبثقة -->
+<div class="modal" id="readyModal" style="display: none;">
+  <div class="modal-content">
+    <h3>هل أنت جاهز لبدء النشاط؟</h3>
+    <button onclick="startActivity()">نعم، لنبدأ</button>
+  </div>
+</div>
+
+
+
+<!-- ✅ مساحة النشاط -->
+<div id="activity-area" style="padding: 20px;"></div>
+
+<!-- ✅ زر تسليم -->
+<div style="text-align:center;">
+  <button id="submit-button" onclick="submitAnswers()" style="display:none;">تسليم</button>
+</div>
+
+<script>
+const supabaseUrl = 'https://duxdtpkxomkjoxnlzjgw.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1eGR0cGt4b21ram94bmx6amd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5MTYyMzIsImV4cCI6MjA2NzQ5MjIzMn0._MOyOhSQvvKrmEwAJGvibp79JXM9MlTJyEVnpvuTJL0'; // قصرت المفتاح هنا
+const { createClient } = supabase;
+const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+const badges = {
+  10: { url: "https://duxdtpkxomkjoxnlzjgw.supabase.co/storage/v1/object/public/photo/cup/cup.png",
+    field: "check_mark"},
+
+  5: { url: "https://duxdtpkxomkjoxnlzjgw.supabase.co/storage/v1/object/public/photo/Rightgolden/Rightgolden.png",
+    field: "gold_check" },
+
+  2: { url: "https://duxdtpkxomkjoxnlzjgw.supabase.co/storage/v1/object/public/photo/correct/correct.png",
+    field: "trophy" }
+};
+
+let currentUser = {};
+let score = 0;
+let countdown;
+
+// ✅ دالة التسجيل
+function submitForm() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const lesson = "نشاط الدرس الأول -- الوحدة الرابعة";
+
+  if (!name || !email || !/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+    return alert("خطأ لا يوجد بريد بهذا العنوان ");
+  }
+
+  // ✅ فقط نحفظ البيانات في المتغير الحالي ولا نرسل شيء لقاعدة البيانات
+  currentUser = { name, email, lesson };
+  document.getElementById("form-container").style.display = "none";
+  document.getElementById("readyModal").style.display = "flex";
+}
+
+
+// ✅ بدء النشاط
+// بدء النشاط مع عرض الشبكة والأسئلة ومربع الحروف القابلة للسحب
+function startActivity() {
+  document.getElementById("readyModal").style.display = "none";
+  document.getElementById("top-bar").style.display = "flex";
+  document.getElementById("user-name").innerText = `👤 ${currentUser.name}`;
+  document.getElementById("score").innerText = score;
+
+  // ⬅️ دالة inputBox تولّد id يبدأ بـ "i"
+  function inputBox(id) {
+    return `<input class="input-box" id="i${id}" maxlength="1">`;
+  }
+
+  document.getElementById("activity-area").innerHTML = `
+    <div class="container" style="margin-top: 50px; display: flex; gap: 20px; justify-content: space-between;">
+      <!-- ✅ الأسئلة -->
+      <div class="questions" style="flex: 1; direction: rtl; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px #ccc;">
+
+  <!-- ✅ مستطيل المقدمة بدل h4 -->
+  <div style="border: 1px solid #000; font-size: 15px; padding: 6px; text-align: justify; background: #fff; border-radius: 6px; margin-bottom: 10px;">
+عند التعامل مع بيئة العمل داخل برنامج مندلي لإدارة المراجع، يلاحظ المستخدم أنها مصممة بشكل يُسهّل التنقل بين أقسام متعددة، تجمع بين العرض العام للمحتوى والتنظيم التفصيلي للمصادر. فمن خلال الجزء العلوي، يمكن التحكم في النوافذ وخصائص العرض، بينما تتيح اللوحة الجانبية الوصول إلى تصنيفات مرنة مثل أحدث الإضافات أو العناصر غير المصنفة بعد. كما تحتوي الواجهة على قوائم تُسهم في ضبط الإعدادات وتخصيص تجربة الاستخدام، مما يجعل إدارة المكتبة العلمية أكثر سلاسة ودقة. عزيزي المتدرب بالاستعانة بالنص السابق، أكمل الفراغات الاتية بما يناسبها:  </div>
+
+  <ol>
+    <li> شريط ..... يوجد به اسم المنصة وأزرار الإغلاق والتصغير</li>
+    <li> يحتوي Unsorted على المراجع الغير ........</li>
+    <li> Recently Added يحتوي على المراجع المضافة ......</li>
+    <li> شريط .... يوجد به مجموعة من القوائم الخاصة بـ Mendeley</li>
+  </ol>
+</div>
+
+
+      <!-- ✅ الشبكة -->
+      <div class="grid-area" style="flex: 1; display: flex; flex-direction: column; align-items: center; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px #ccc;">
+        <div style="display: grid; grid-template-columns: repeat(7, 30px); grid-auto-rows: 30px; gap: 2px;">
+          ${[
+            "", "1", "", "", "", "", "",
+            "4", inputBox("1"), "", "", "", "", "",
+            inputBox("7"), inputBox("8"), inputBox("9"), inputBox("10"), inputBox("11"), inputBox("12"), inputBox("13"),
+            "3", inputBox("15"), "", "", "", "", "",
+            inputBox("21"), inputBox("22"), "", "", "", "", "",
+            inputBox("28"), inputBox("29"), "", "", "", "", "",
+            inputBox("35"), inputBox("36"), "", "", "", "", "",
+            inputBox("42"), inputBox("43"), "", "", "", "", "",
+            inputBox("49"), inputBox("50"), inputBox("51"), inputBox("52"), inputBox("53"), "", "2"
+          ].map(cell => cell || `<div></div>`).join("")}
+        </div>
+
+        <!-- ✅ الحروف -->
+        <div style="margin: 0px 0; display: flex; flex-wrap: wrap; gap: 5px; justify-content: center;">
+          ${["ة", "خ", "ب", "ر", "ت", "و", "ن", "ع", "ي", "م", "ئ", "ا", "و", "ق", "ل", "ا"].map(letter =>
+            `<div class="draggable-letter" draggable="true">${letter}</div>`
+          ).join("")}
+        </div>
+
+        <button id="submit-button" onclick="submitAnswers()" style="display: inline-block;">تسليم</button>
+      </div>
+    </div>
+  `;
+
+  // ✅ السحب والإفلات
+  document.querySelectorAll('.draggable-letter').forEach(letter => {
+    letter.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', letter.innerText);
+    });
+  });
+
+  document.querySelectorAll('.input-box').forEach(input => {
+    input.addEventListener('dragover', e => e.preventDefault());
+    input.addEventListener('drop', e => {
+      e.preventDefault();
+      const dropped = e.dataTransfer.getData('text/plain');
+      input.value = dropped;
+    });
+  });
+}
+
+
+
+
+
+// ✅ تحديث submitAnswers لتعمل مع الحقول الجديدة
+async function submitAnswers() {
+  clearInterval(countdown);
+
+  const correctMap = {
+    "i1": "ا",
+    "i7": "ا",
+    "i8": "ل",
+    "i9": "ق",
+    "i10": "و",
+    "i11": "ا",
+    "i12": "ئ",
+    "i13": "م",
+    "i15": "ع",
+    "i21": "ا",
+    "i22": "ن",
+    "i28": "ر",
+    "i29": "و",
+    "i35": "خ",
+    "i36": "ا",
+    "i42": "ؤ",
+    "i43": "ن",
+    "i49": "م",
+    "i50": "ر",
+    "i51": "ت",
+    "i52": "ب",
+    "i53": "ة"
+  };
+
+  let correctLetters = 0;
+
+  for (const [id, expectedValue] of Object.entries(correctMap)) {
+    const input = document.getElementById(id);
+    if (!input) continue;
+    const value = input.value.trim();
+    if (value === expectedValue) {
+      correctLetters++;
+      input.style.border = "2px solid green";
+    } else {
+      input.style.border = "2px solid red";
+    }
+  }
+
+  score = correctLetters;
+  document.getElementById("score").innerText = score;
+
+  let badge = null;
+  if (score >= 15) badge = badges[10];
+  else if (score >= 8) badge = badges[5];
+  else if (score >= 5) badge = badges[2];
+
+  if (badge) {
+    document.getElementById("badge-image").src = badge.url;
+    document.getElementById("badge-image").style.display = "inline";
+  }
+
+  // ✅ حفظ الدرجة والشارة في سطر واحد
+  const data = {
+    name: currentUser.name,
+    email: currentUser.email,
+    lesson: currentUser.lesson,
+    score: score
+  };
+
+  if (badge) {
+    data[badge.field] = badge.url;
+  }
+
+  await supabaseClient.from('activities_results').insert([data]);
+
+  showNextOptions();
+}
+
+
+
+//--------------------------
+// عند بدء السحب
+  document.querySelectorAll('.draggable-letter').forEach(letter => {
+    letter.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', letter.innerText);
+    });
+  });
+
+  // إعداد الحقول لاستقبال الإفلات
+  document.querySelectorAll('.input-box').forEach(input => {
+    input.addEventListener('dragover', e => {
+      e.preventDefault(); // السماح بالإفلات
+    });
+
+    input.addEventListener('drop', e => {
+      e.preventDefault();
+      const droppedChar = e.dataTransfer.getData('text/plain');
+      input.value = droppedChar;
+    });
+  });
+
+
+
+//
+function showNextOptions() {
+  // إنشاء صندوق الخيارات
+  const optionsContainer = document.createElement('div');
+  optionsContainer.style.textAlign = "center";
+  optionsContainer.style.marginTop = "20px";
+
+  const leaderboardBtn = document.createElement('button');
+  leaderboardBtn.innerHTML = '🏆 قائمة المتصدرين';
+  leaderboardBtn.style.cssText = `
+    padding: 10px 20px; 
+    margin: 10px; 
+    background: #4a00e0; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 14px; 
+    cursor: pointer;
+  `;
+  leaderboardBtn.onclick = () => {
+    window.location.href = "ranking4_1.html";
+  };
+
+  const evaluationBtn = document.createElement('button');
+  evaluationBtn.innerHTML = 'المتابعة إلى التقويم الذاتي';
+  evaluationBtn.style.cssText = `
+    padding: 10px 20px; 
+    margin: 10px; 
+    background: #00796b; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 14px; 
+    cursor: pointer;
+  `;
+  evaluationBtn.onclick = () => {
+    window.location.href = "https://educationalenvironment.github.io/Educational-environment2/unit4/Self-evaluation4_1.html";
+  };
+
+  optionsContainer.appendChild(leaderboardBtn);
+  optionsContainer.appendChild(evaluationBtn);
+
+  // وضعهم في الصفحة بعد النتيجة أو الشارة
+  const badgeImage = document.getElementById("badge-image");
+  badgeImage.parentElement.appendChild(optionsContainer);
+}
+
+
+// ✅ حفظ الشارة
+async function saveFinalResult(score, badge) {
+  const data = {
+    name: currentUser.name,
+    email: currentUser.email,
+    lesson: currentUser.lesson,
+    score: score
+  };
+
+  // أضف الحقل المناسب حسب الشارة
+  if (badge) {
+    data[badge.field] = badge.url;
+  }
+
+  await supabaseClient.from('activities_results').insert([data]);
+}
+
+
+///ممممممممممممممممممممممممممممممممممممممممم
+
+function showFeedback(type) {
+  const feedback = document.getElementById("feedback");
+  const image = document.getElementById("feedback-image");
+  image.src = type === "correct"
+    ? "https://cdn-icons-png.flaticon.com/512/845/845646.png" // ✅ صورة صح
+    : "https://cdn-icons-png.flaticon.com/512/463/463612.png"; // ❌ صورة خطأ
+  feedback.style.display = "block";
+  setTimeout(() => feedback.style.display = "none", 1000);
+}
+
+//------------------------------------------------------------
+ let timeLeft = 20;
+  const timerEl = document.getElementById("timer");
+  const circleEl = document.getElementById("timer-circle");
+
+  const timerInterval = setInterval(() => {
+    timeLeft--;
+    timerEl.textContent = timeLeft;
+
+    // تغيير لون الدائرة تدريجيًا
+    if (timeLeft > 13) {
+      circleEl.style.backgroundColor = "green";
+    } else if (timeLeft > 6) {
+      circleEl.style.backgroundColor = "orange";
+    } else {
+      circleEl.style.backgroundColor = "red";
+    }
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timerEl.textContent = "0";
+      circleEl.style.backgroundColor = "red";
+    }
+  }, 1000);
+</script>
+
+<!-- ✅ مكتبة Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</body>
+</html>
+

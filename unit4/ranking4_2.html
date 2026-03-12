@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قائمة الترتيب</title>
+   <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      direction: rtl;
+    }
+
+    .top-bar {
+      background: linear-gradient(to left, #2196f3, #21cbf3);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .module {
+      padding: 20px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      max-width: 1100px;
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    .module h2 {
+      color: #333;
+      border-right: 5px solid #2196f3;
+      padding-right: 10px;
+    }
+
+    .lesson-section {
+      margin-top: 20px;
+      border-top: 1px dashed #ccc;
+      padding-top: 15px;
+    }
+
+    .lesson-section h3 {
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    .header-row {
+      display: grid;
+      grid-template-columns: 1.5fr 2fr 2fr 1fr 1fr 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 15px;
+      background: #e3f2fd;
+      border-radius: 10px;
+      font-weight: bold;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .card-row {
+      display: grid;
+      grid-template-columns: 1.5fr 2fr 2fr 1fr 1fr 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 18px 15px;
+      margin: 15px 0;
+      background: linear-gradient(145deg, #ffffff, #f1f4f8);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+      font-weight: normal;
+      animation: zoomFade 0.4s ease forwards;
+      transition: all 0.3s ease;
+    }
+
+    .card-row:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+      background: linear-gradient(145deg, #eef3fa, #ffffff);
+    }
+
+    .card-row img {
+      height: 20px;
+      width: 20px;
+      display: inline-block;
+      object-fit: contain;
+    }
+
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(30px)}
+      to {opacity: 1; transform: translateY(0)}
+    }
+
+    @keyframes zoomFade {
+      from {opacity: 0; transform: scale(0.9)}
+      to {opacity: 1; transform: scale(1)}
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    🏆 قائمة ترتيب المتدربين حسب الأنشطة 🏆
+  </div>
+
+  <div id="ranking-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabaseUrl = 'https://duxdtpkxomkjoxnlzjgw.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1eGR0cGt4b21ram94bmx6amd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5MTYyMzIsImV4cCI6MjA2NzQ5MjIzMn0._MOyOhSQvvKrmEwAJGvibp79JXM9MlTJyEVnpvuTJL0'; // المفتاح المختصر لأمان العرض
+    const { createClient } = supabase;
+    const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+    const modules = {
+      "الموديول الرابع": ["نشاط الدرس الثاني -- الوحدة الرابعة"],
+
+    };
+
+    async function loadRanking() {
+      const container = document.getElementById("ranking-container");
+      const { data, error } = await supabaseClient.from("activities_results").select("*");
+
+      if (error) {
+        container.innerHTML = "<p>فشل في تحميل البيانات.</p>";
+        console.error(error);
+        return;
+      }
+
+      for (const [moduleName, lessons] of Object.entries(modules)) {
+        const moduleDiv = document.createElement("div");
+        moduleDiv.className = "module";
+        moduleDiv.innerHTML = `<h2>${moduleName}</h2>`;
+
+        lessons.forEach(lessonName => {
+          const section = document.createElement("div");
+          section.className = "lesson-section";
+          section.innerHTML = `<h3>${lessonName}</h3>`;
+
+          const header = document.createElement("div");
+          header.className = "header-row";
+          header.innerHTML = `
+            <div>الاسم</div>
+            <div>الإيميل</div>
+            <div>اسم النشاط</div>
+            <div> متميز 🏆</div>
+            <div>متفوق ⭐</div>
+            <div> جيد  ✅</div>
+            <div>الدرجة</div>
+          `;
+          section.appendChild(header);
+
+          const filtered = data.filter(entry => entry.lesson === lessonName);
+          const sorted = filtered.sort((a, b) => b.score - a.score);
+
+          sorted.forEach(entry => {
+            const row = document.createElement("div");
+            row.className = "card-row";
+            row.innerHTML = `
+              <div>${entry.name}</div>
+              <div>${entry.email}</div>
+              <div>${entry.lesson}</div>
+              <div>${entry.check_mark ? '<img src="' + entry.check_mark + '">' : ''}</div>
+              <div>${entry.gold_check ? '<img src="' + entry.gold_check + '">' : ''}</div>
+              <div>${entry.trophy ? '<img src="' + entry.trophy + '">' : ''}</div>
+              <div>${entry.score}</div>
+            `;
+            section.appendChild(row);
+          });
+
+          moduleDiv.appendChild(section);
+        });
+
+        container.appendChild(moduleDiv);
+      }
+    }
+
+    loadRanking();
+  </script>
+  <button onclick="window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit4/Self-evaluation4_2.html'" 
+ style="padding: 10px; background-color: #3f51b5; color: white; border: none; border-radius: 5px; cursor: pointer;">
+  تابع تقدمك إلى التقويم الذاتي  
+</button>
+
+
+
+</body>
+</html>
