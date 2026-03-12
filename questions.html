@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار التقويم القبلي</title>
+    <style>
+      body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    font-size: 14px;
+}
+
+.container {
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+}
+
+.section {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.question {
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    transition: background 0.3s;
+}
+
+.question:hover {
+    background: #eef6ff;
+}
+
+.question p {
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: #444;
+    background: #dbeeff; /* خلفية متناسقة لرأس السؤال */
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.question label {
+    display: block;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: color 0.2s;
+    font-size: 12px; /* تصغير حجم نص الاختيارات */
+}
+
+.question label:hover {
+    color: #007bff;
+}
+
+input[type="radio"] {
+    margin-left: 6px;
+    transform: scale(0.9); /* تصغير دائرة الاختيار */
+}
+
+button {
+    display: block;
+    margin: 30px auto;
+    padding: 8px 25px;
+    font-size: 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 380px;
+}
+
+.modal-content h3 {
+    margin-bottom: 18px;
+    font-size: 17px;
+}
+
+.modal-content button {
+    background: #28a745;
+    padding: 8px 20px;
+    font-size: 14px;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2> أولا: أسئلة الاختيار من متعدد</h2>
+            <div class="question">
+                <p>1.	يعرف دمج التكنولوجيا في التعليم بأنه جميع ما يأتي عدا ....... </p>
+                <label><input type="radio" name="mc1" value="0"> أ-مدخل يركز على الانتشار الهادف للتكنولوجيا المستحدثة </label>
+                <label><input type="radio" name="mc1" value="0">ب-عملية دمج بين التعليم الإلكتروني والتعليم التقليدي </label>
+                <label><input type="radio" name="mc1" value="0">ج-الاعتماد على التقنيات التكنولوجية الحديثة مثل الانترنت ووسائل التواصل الاجتماعي </label>
+                <label><input type="radio" name="mc1" value="1">د-مجال علوم الكمبيوتر المخصص لحل المشكلات المعرفية المرتبطة عادةً بالذكاء البشري </label>
+            </div>
+            <div class="question">
+                <p>2. من أهمية دمج التكنولوجيا في التعليم ......... </p>
+                <label><input type="radio" name="mc2" value="0"> أ- تعزيز الوصول إلى التعليم</label>
+                <label><input type="radio" name="mc2" value="0">ب- تحسين تجربة المستخدم من خلال توصيات مخصصة بناءً على اهتماماته </label>
+                <label><input type="radio" name="mc2" value="1">ج- تلبية احتياجات العصر الرقمي والمساعدة على التعلم بطرق مبتكرة. </label>
+                <label><input type="radio" name="mc2" value="0">د- المساعدة في أتمتة العمليات المعقدة وتقليل الأخطاء البشرية </label>
+            </div>
+            <div class="question">
+                <p>3. يعد.............. من أهداف دمج التكنولوجيا في التعليم </p>
+                <label><input type="radio" name="mc3" value="1"> أ‌-	ملاحقة ومتابعة التغيرات التكنولوجية في التعليم</label>
+                <label><input type="radio" name="mc3" value="0"> ب‌-	توفير البنية التحتية</label>
+                <label><input type="radio" name="mc3" value="0">ج- الوصول إلى البيانات في الوقت الحقيقي </label>
+                <label><input type="radio" name="mc3" value="0">د- ثبات المحتوى وعدم تطوره </label>
+            </div>
+            <div class="question">
+                <p>4. يعد ....... من متطلبات دمج التكنولوجيا في التعليم </p>
+                <label><input type="radio" name="mc4" value="1">أ. توفير الدورات التدريبية  </label>
+                <label><input type="radio" name="mc4" value="0">ب- امتلاك مهارات التفكير النقدي </label>
+                <label><input type="radio" name="mc4" value="0">ج-توفر خبرة كافية في تقنيات البيانات الضخمة </label>
+                <label><input type="radio" name="mc4" value="0"> د- الوصول إلى البيانات في الوقت الحقيقي</label>
+            </div>
+            <div class="question">
+                <p>5. يعد..........أحد مقومات نجاح دمج التكنولوجيا في التعليم </p>
+                <label><input type="radio" name="mc5" value="1">أ‌-	توفر المحتوى الرقمي العلمي </label>
+                <label><input type="radio" name="mc5" value="0"> ب‌-	ضعف الاتصال بالطلاب</label>
+                <label><input type="radio" name="mc5" value="0">ج-ج- تحسين مشاركة الطلاب وتحفيزهم </label>
+                <label><input type="radio" name="mc5" value="0"> د- سرعة اتِّخاذ القرار</label>
+            </div>
+            <div class="question">
+                <p> 6. تعرف مهارات دمج التكنولوجيا في التعليم بأنها ........</p>
+                <label><input type="radio" name="mc6" value="0"> أ- توظيف وتفعيل أدوات التقنية الحديثة</label>
+                <label><input type="radio" name="mc6" value="0">ب- المهارات التي يحتاجها العاملون في المؤسسة التعليمية </label>
+                <label><input type="radio" name="mc6" value="0">ج- تدريب المعلمين ليكونوا أعضاء فاعلين ومنتجين   </label>
+                <label><input type="radio" name="mc6" value="1">د- جميع ما سبق صحيح </label>
+            </div>
+            <div class="question">
+                <p> 7. يحقق التدريب على أهمية مهارات دمج التكنولوجيا.............</p>
+                <label><input type="radio" name="mc7" value="0">أ- الارتباط بالوقت والمكان </label>
+                <label><input type="radio" name="mc7" value="1">ب-تصميم المقررات التعليمية </label>
+                <label><input type="radio" name="mc7" value="0">ج- فشل العملية التعليمية </label>
+                <label><input type="radio" name="mc7" value="0"> د- ضعف الثقة للمتدرب</label>
+            </div>
+            <div class="question">
+                <p> 8. جميع ما يأتي يعد من إحدى مهارات الاتصال الالكتروني عدا......  </p>
+                <label><input type="radio" name="mc8" value="0">أ. إنتاج عناصر التعلم </label>
+                <label><input type="radio" name="mc8" value="0">     ب.  استخدام أدوات التصميم</label>
+                <label><input type="radio" name="mc8" value="1">ج.   وجود أساس نظري  </label>
+                <label><input type="radio" name="mc8" value="0">د.  استخدام المعلومات والتكنولوجيا كأدوات لتحقيق النمو الشخصي والتميز المهني </label>
+            </div>
+            <div class="question">
+                <p>9. جميع ما يأتي يعد من مهارات التقويم الالكتروني عدا........ </p>
+                <label><input type="radio" name="mc9" value="0"> أ- بناء جدول المواصفات </label>
+                <label><input type="radio" name="mc9" value="0"> ب- حدد عدد الأسئلة لكل اختبار</label>
+                <label><input type="radio" name="mc9" value="1"> ج- التواصل الرقمي </label>
+                <label><input type="radio" name="mc9" value="0">د- اختيار نوع المفردات المستخدمة في الاختبار </label>
+            </div>
+            <div class="question">
+                <p>10. تتضمن مهارة الثقافة الرقمية ثلاث مهارات منها مهارة.......  </p>
+                <label><input type="radio" name="mc10" value="1">أ‌-	الثقافة المعلوماتية </label>
+                <label><input type="radio" name="mc10" value="0"> ب- المواطنة الرقمية</label>
+                <label><input type="radio" name="mc10" value="0"> ج- تصميم المحتوى</label>
+                <label><input type="radio" name="mc10" value="0">د- التواصل الرقمي </label>
+            </div>
+            <div class="question">
+                <p>11. تعد ...... إحدى مهارات التصميم التعليمي كأحد مهارات دمج التكنولوجيا في التعليم   </p>
+                <label><input type="radio" name="mc11" value="0">أ-الثقافة المعلوماتية </label>
+                <label><input type="radio" name="mc11" value="0"> ب-اكتشاف الأخطاء</label>
+                <label><input type="radio" name="mc11" value="1">ج-التطوير </label>
+                <label><input type="radio" name="mc11" value="0"> د- تسلسل المحتوى</label>
+            </div>
+            <div class="question">
+                <p>12.تعد ...... إحدى المهارات الفرعية لمرحلة التحليل في التصميم التعليمي </p>
+                <label><input type="radio" name="mc12" value="0">أ- اختيار مصادر التعلم </label>
+                <label><input type="radio" name="mc12" value="0">  ب- اختيار تسلسل المحتوى </label>
+                <label><input type="radio" name="mc12" value="0">  ج-إنشاء استراتيجيات تقييم للطلاب.</label>
+                <label><input type="radio" name="mc12" value="1"> د- فهم مستوى المعرفة والمهارات التي يمتلكها المتعلم قبل بدء التعلم</label>
+            </div>
+            <div class="question">
+                <p>  . 13. ... تعد من أهم المهارات الفرعية لمرحلة التصميم في التصميم التعليمي</p>
+                <label><input type="radio" name="mc13" value="1">أ-اختيار مصادر التعلم </label>
+                <label><input type="radio" name="mc13" value="0">  ب -تحليل المحتوى</label>
+                <label><input type="radio" name="mc13" value="0"> ج-تنفيذ الفكرة </label>
+                <label><input type="radio" name="mc13" value="0">  د-المهارات القبلية للمتعلم </label>
+            </div>
+            <div class="question">
+                <p>144. يعد....... من مهارات مرحلة التطوير في التصميم التعليمي </p>
+                <label><input type="radio" name="mc14" value="0">أ-إنشاء استراتيجيات تقييم للطلاب. </label>
+                <label><input type="radio" name="mc14" value="1">ب-تصميم تخطيطات لواجهة المستخدم في منصة تعليمية. </label>
+                <label><input type="radio" name="mc14" value="0">   ج اختر تسلسل المحتوى </label>
+                <label><input type="radio" name="mc14" value="0"> د-تحليل الاحتياجات التعليمية للمتعلمين</label>
+            </div>
+            <div class="question">
+                <p>15.إذا أردت تسجيل الدخول لأول مرة في منصة Teams  يتم الضغط على أمر.......  </p>
+                <label><input type="radio" name="mc15" value="0">A-Sign Up </label>
+                <label><input type="radio" name="mc15" value="0"> B-Log in</label>
+                <label><input type="radio" name="mc15" value="1"> c-Sign in</label>
+                <label><input type="radio" name="mc15" value="0">d-start </label>
+            </div>
+            <div class="question">
+                <p> 16.تعتبر ......إحدى مكونات واجهة العمل في منصة   Teams</p>
+                <label><input type="radio" name="mc16" value="1">أ- أسماء الفرق </label>
+                <label><input type="radio" name="mc16" value="0"> ب- البحث	</label>
+                <label><input type="radio" name="mc16" value="0">ج- كل من ب،أ صحيح </label>
+                <label><input type="radio" name="mc16" value="0"> د-واجهة العمل</label>
+            </div>
+            <div class="question">
+                <p>17.لإنشاء فصل (فريق) افتراضي في منصة Teams يتم اختيار أمر..... </p>
+                <label><input type="radio" name="mc17" value="1">A- Creat Team </label>
+                <label><input type="radio" name="mc17" value="0"> B-Join Team</label>
+                <label><input type="radio" name="mc17" value="0"> c-Add Team</label>
+                <label><input type="radio" name="mc17" value="0">d- New Team </label>
+            </div>
+            <div class="question">
+                 <p>
+18.تعبر الصورة الآتيه عن .......
+<img src="Photo/questions/q18.jpg" alt="صورة" style="
+  width: 100px; 
+  height: auto; 
+  transition: transform 0.3s ease-in-out; 
+  cursor: zoom-in;
+" 
+onmouseover="this.style.transform='scale(5)'" 
+onmouseout="this.style.transform='scale(1)'">
+  </p>
+                <label><input type="radio" name="mc18" value="1">أ-الانضمام للفصل  </label>
+                <label><input type="radio" name="mc18" value="0">ب-إنشاء فصل </label>
+                <label><input type="radio" name="mc18" value="0">ج-فتح الفصل </label>
+                <label><input type="radio" name="mc18" value="0"> د-جميع ما سبق صحيح</label>
+            </div>
+            <div class="question">
+                <p> 19.لبدء الاتصال في منصة Teamsيتم اختيار أمر................</p>
+                <label><input type="radio" name="mc19" value="1">A-   meet now </label>
+                <label><input type="radio" name="mc19" value="0">B-Join </label>
+                <label><input type="radio" name="mc19" value="0"> c- creat</label>
+                <label><input type="radio" name="mc19" value="0">Saved-d </label>
+            </div>
+            <div class="question">
+                <p>
+20.تعبر هذه الصورة عن                   أمر..... داخل اجتماع الفصل الافتراضي عبر منصة Teams
+    <img src="Photo/questions/q20.jfif" alt="صورة" sstyle="
+  width: 100px; 
+  height: auto; 
+  transition: transform 0.3s ease-in-out; 
+  cursor: zoom-in;
+" 
+onmouseover="this.style.transform='scale(5)'" 
+onmouseout="this.style.transform='scale(1)'">
+  </p>
+                <label><input type="radio" name="mc20" value="1">أ-مشاركة سطح المكتب </label>
+                <label><input type="radio" name="mc20" value="0"> ب-كتابة رسائل </label>
+                <label><input type="radio" name="mc20" value="0"> ج-فتح الكاميرا</label>
+                <label><input type="radio" name="mc20" value="0"> د-إضافة أعضاء </label>
+            </div>
+            <div class="question">
+                <p>21.يستخدم الأمر .....عند ارسال الرسالة في منصة Teams </p>
+                <label><input type="radio" name="mc21" value="1"> A-post</label>
+                <label><input type="radio" name="mc21" value="0">B-chat </label>
+                <label><input type="radio" name="mc21" value="0"> c-receive</label>
+                <label><input type="radio" name="mc21" value="0"> d-text </label>
+            </div>
+            <div class="question">
+                <p> 22.لتحميل الملفات داخل الفصل الافتراضي عبر منصة Teams.يتم اختيار أمر....</p>
+                <label><input type="radio" name="mc22" value="1">A- upload. </label>
+                <label><input type="radio" name="mc22" value="0">B-Download </label>
+                <label><input type="radio" name="mc22" value="0"> c-Copy</label>
+                <label><input type="radio" name="mc22" value="0">d- Save </label>
+            </div>
+            <div class="question">
+                 <p>
+32.يستخدم هذا الامر في منصة Teams ل......
+    <img src="Photo/questions/q23.jfif" alt="صورة" style="
+  width: 100px; 
+  height: auto; 
+  transition: transform 0.3s ease-in-out; 
+  cursor: zoom-in;
+" 
+onmouseover="this.style.transform='scale(5)'" 
+onmouseout="this.style.transform='scale(1)'">
+  </p>
+                <label><input type="radio" name="mc23" value="1">أ-مشاركة السبورة البيضاء </label>
+                <label><input type="radio" name="mc23" value="0">ب-نسخ الملفات </label>
+                <label><input type="radio" name="mc23" value="0"> ج-تنزيل الملفات</label>
+                <label><input type="radio" name="mc23" value="0"> د- مشاركة العروض التقديمية</label>
+            </div>
+            <div class="question">
+                <p>24.يستخدم أمر .....لإدارة الفصل الافتراضي في منصة Teams </p>
+                <label><input type="radio" name="mc24" value="0">A-Add Team </label>
+                <label><input type="radio" name="mc24" value="1"> B-Manage Team</label>
+                <label><input type="radio" name="mc24" value="0"> c-leave Team</label>
+                <label><input type="radio" name="mc24" value="0">d-seeting Team </label>
+            </div>
+            <div class="question">
+                <p> 25.لمشاركة الفصل الافتراضي عبر منصة Teams يتم الضغط على زر.... لاختيار رمز الفريق وارساله للطلبة</p>
+                <label><input type="radio" name="mc25" value="1"> A- team code</label>
+                <label><input type="radio" name="mc25" value="0"> B-Passcode</label>
+                <label><input type="radio" name="mc25" value="0"> c-password</label>
+                <label><input type="radio" name="mc25" value="0">D-username	 </label>
+            </div>
+            <div class="question">
+                <p>26.لإنشاء قناة داخل الفصل الافتراضي يتم الضغط على Add Channel. واختيار أمر.... </p>
+                <label><input type="radio" name="mc26" value="0">A-New </label>
+                <label><input type="radio" name="mc26" value="1">B- create	 </label>
+                <label><input type="radio" name="mc26" value="0">c-Edit </label>
+                <label><input type="radio" name="mc26" value="0"> d-Save</label>
+            </div>
+            <div class="question">
+                <p>27.لإضافة أعضاء في منصة Teams يتم اختيار أمر .... </p>
+                <label><input type="radio" name="mc27" value="0">A-Add Team </label>
+                <label><input type="radio" name="mc27" value="1">  B-Add Members</label>
+                <label><input type="radio" name="mc27" value="0"> C-leave Team</label>
+                <label><input type="radio" name="mc27" value="0"> d-setting Team</label>
+            </div>
+            <div class="question">
+                <p>28. لحذف فريق في منصة Teams  يتم الضغط على أمر ...... </p>
+                <label><input type="radio" name="mc28" value="1">A- Delete team </label>
+                <label><input type="radio" name="mc28" value="0"> B-Manage team</label>
+                <label><input type="radio" name="mc28" value="0">c-Leave team </label>
+                <label><input type="radio" name="mc28" value="0"> d-Remove team</label>
+            </div>
+            <div class="question">
+                <p>29.لتسجيل الدخول الى Google Form يتم اختيار أمر................. </p>
+                <label><input type="radio" name="mc29" value="1">A- Sign-in	 </label>
+                <label><input type="radio" name="mc29" value="0"> B- Sign-out	</label>
+                <label><input type="radio" name="mc29" value="0"> c- Sign</label>
+                <label><input type="radio" name="mc29" value="0"> d-Save</label>
+            </div>
+            <div class="question">
+                <p>
+                    30.تعبر هذه الصورة عن في Google Form
+                    <img src="Photo/questions/q30.jfif" alt="صورة" style="
+  width: 100px; 
+  height: auto; 
+  transition: transform 0.3s ease-in-out; 
+  cursor: zoom-in;
+" 
+onmouseover="this.style.transform='scale(5)'" 
+onmouseout="this.style.transform='scale(1)'"> </p>
+                <label><input type="radio" name="mc30" value="0">أ‌-تسجيل الدخول  </label>
+                <label><input type="radio" name="mc30" value="1"> ب‌-انشاء نموذج جديد</label>
+                <label><input type="radio" name="mc30" value="0"> ج- حذف نموذج</label>
+                <label><input type="radio" name="mc30" value="0">د-اضافة نموذج </label>
+            </div>
+            <div class="question">
+                <p>31.يعد...............من مكونات واجهة العمل في Google Form </p>
+                <label><input type="radio" name="mc31" value="0">أ- اسم الاختبار </label>
+                <label><input type="radio" name="mc31" value="0">ب-عنوان الاختبار </label>
+                <label><input type="radio" name="mc31" value="0">ج-قسم الأسئلة </label>
+                <label><input type="radio" name="mc31" value="1">د-جميع ما سبق صحيح </label>
+            </div>
+            <div class="question">
+                <p>32.لإدراج صورة للاختبار في منصة   Google Form . يتم اختيار أمر..... </p>
+                <label><input type="radio" name="mc32" value="1"> A- Upload</label>
+                <label><input type="radio" name="mc32" value="0"> B- Add new</label>
+                <label><input type="radio" name="mc32" value="0"> c-Creat</label>
+                <label><input type="radio" name="mc32" value="0">d-Save </label>
+            </div>
+            <div class="question">
+                <p>33.لإضافة أسئلة للاختبار في Google Form يتم اختيار أمر..... . </p>
+                <label><input type="radio" name="mc33" value="0"> A.Upload</label>
+                <label><input type="radio" name="mc33" value="1"> B.Add new</label>
+                <label><input type="radio" name="mc33" value="0">c.Creat </label>
+                <label><input type="radio" name="mc33" value="0">d.Save </label>
+            </div>
+            <div class="question">
+                <p> 34.تعبر هذه الصورة  عن إضافة....
+                      <img src="Photo/questions/q34.jfif" alt="صورة" style="
+  width: 100px; 
+  height: auto; 
+  transition: transform 0.3s ease-in-out; 
+  cursor: zoom-in;
+" 
+onmouseover="this.style.transform='scale(5)'" 
+onmouseout="this.style.transform='scale(1)'">
+                </p>
+                <label><input type="radio" name="mc34" value="1"> أ- سؤال اختيار من متعدد</label>
+                <label><input type="radio" name="mc34" value="0">ب- سؤال إجابة قصيرة </label>
+                <label><input type="radio" name="mc34" value="0"> ج- سؤال قائمة منسدلة</label>
+                <label><input type="radio" name="mc34" value="0">د- سؤال صح وخطأ   </label>
+            </div>
+            <div class="question">
+                <p>.35لإضافة قسم للاختبار في Google Form يتم اختيار رمز..... . </p>
+                <label><input type="radio" name="mc35" value="0">  <img src="Photo/questions/g1_35.jfif" alt="صورة" style="width: 100px; height: auto;"></label>
+                <label><input type="radio" name="mc35" value="0"> <img src="Photo/questions/g2_35.jfif" alt="صورة" style="width: 100px; height: auto;"> </label>
+                <label><input type="radio" name="mc35" value="0"> <img src="Photo/questions/g3_35.jfif" alt="صورة" style="width: 100px; height: auto;"> </label>
+                <label><input type="radio" name="mc35" value="1"> <img src="Photo/questions/g4_35.jfif" alt="صورة" style="width: 100px; height: auto;"> </label>
+            </div>
+            <div class="question">
+                <p>36.لتغيير مظهر الاختبار. في Google Formيتم اختيار...... </p>
+                <label><input type="radio" name="mc36" value="1">A- Theme </label>
+                <label><input type="radio" name="mc36" value="0">B-Delete </label>
+                <label><input type="radio" name="mc36" value="0">c-Cut </label>
+                <label><input type="radio" name="mc36" value="0"> d-Save</label>
+            </div>
+            <div class="question">
+                <p>37.لنسخ سؤال داخل الاختبار في Google Formيتم اختر أمر...... </p>
+                <label><input type="radio" name="mc37" value="1">A- Copy </label>
+                <label><input type="radio" name="mc37" value="0">B-Delete </label>
+                <label><input type="radio" name="mc37" value="0">c-Cut </label>
+                <label><input type="radio" name="mc37" value="0">d-Save </label>
+            </div>
+            <div class="question">
+                <p> 38.لحذف سؤال داخل الاختبار في Google Formيتم اختر أمر......</p>
+                <label><input type="radio" name="mc38" value="0">A- Copy </label>
+                <label><input type="radio" name="mc38" value="1">B- Delete </label>
+                <label><input type="radio" name="mc38" value="0">c-Cut </label>
+                <label><input type="radio" name="mc38" value="0"> d-Remove</label>
+            </div>
+            <div class="question">
+                <p> 39.يستخدم الامر .............. في تنزيل الردود في جوجل فورم على هيئة شيت اكسيل </p>
+                <label><input type="radio" name="mc39" value="1"> A-Download reponses</label>
+                <label><input type="radio" name="mc39" value="0"> B-Upload</label>
+                <label><input type="radio" name="mc39" value="0">c-Add </label>
+                <label><input type="radio" name="mc39" value="0"> d-New</label>
+            </div>
+            <div class="question">
+                <p>40.تعبر هذه الصورة عن.... في Google form 
+                    <img src="Photo/questions/q40.jfif" alt="صورة" style="
+  width: 100px; 
+  height: auto; 
+  transition: transform 0.3s ease-in-out; 
+  cursor: zoom-in;
+" 
+onmouseover="this.style.transform='scale(5)'" 
+onmouseout="this.style.transform='scale(1)'">
+                </p>
+                <label><input type="radio" name="mc40" value="1">copy link-A </label>
+                <label><input type="radio" name="mc40" value="0">share-B</label>
+                <label><input type="radio" name="mc40" value="0"> send-c</label>
+                <label><input type="radio" name="mc40" value="0"> publish-d</label>
+            </div>
+            <div class="question">
+                <p>41.تعبر هذه الصورة عن.... في Google form
+                    <img src="Photo/questions/q41.jfif" alt="صورة" style="
+  width: 100px; 
+  height: auto; 
+  transition: transform 0.3s ease-in-out; 
+  cursor: zoom-in;
+" 
+onmouseover="this.style.transform='scale(5)'" 
+onmouseout="this.style.transform='scale(1)'">
+                </p>
+                <label><input type="radio" name="mc41" value="0"> Publish-A</label>
+                <label><input type="radio" name="mc41" value="0">Copylink-B </label>
+                <label><input type="radio" name="mc41" value="1"> Preview-c</label>
+                <label><input type="radio" name="mc41" value="0"> Creat-d</label>
+            </div>
+            <div class="question">
+                <p>42.لتسجيل الدخول في Mendeley يتم اختيار أمر... </p>
+                <label><input type="radio" name="mc42" value="0"> A-Login</label>
+                <label><input type="radio" name="mc42" value="1"> B- Sign in</label>
+                <label><input type="radio" name="mc42" value="0"> c- Sign out</label>
+                <label><input type="radio" name="mc42" value="0">d-Remove </label>
+            </div>
+            <div class="question">
+                <p> 43. تتمثل واجهة العمل في منصة  Mendeley على جميع ماسبق عدا...</p>
+                <label><input type="radio" name="mc43" value="0">أ_شريط العنوان </label>
+                <label><input type="radio" name="mc43" value="0">ب- شريط القوائم </label>
+                <label><input type="radio" name="mc43" value="1">ج-لوحة الالوان </label>
+                <label><input type="radio" name="mc43" value="0"> د- الملف التعريفي</label>
+            </div>
+            <div class="question">
+                <p> 44 .شريط......... يوجد به اسم المنصة  وأزرر الاغلاق والتصغير</p>
+                <label><input type="radio" name="mc44" value="0"> أ- القوائم</label>
+                <label><input type="radio" name="mc44" value="0"> ب- الحالة</label>
+                <label><input type="radio" name="mc44" value="1"> ج- العنوان</label>
+                <label><input type="radio" name="mc44" value="0"> د- المهام</label>
+            </div>
+            <div class="question">
+                <p>45.لإنشاء مكتبة بداخلها كتب ومراجع في Mendeley يتم الضغط على أمر Refrences....واختيار Import Library </p>
+                <label><input type="radio" name="mc45" value="1"> A.Add</label>
+                <label><input type="radio" name="mc45" value="0"> B.New</label>
+                <label><input type="radio" name="mc45" value="0">c.Creat </label>
+                <label><input type="radio" name="mc45" value="0"> d.Import</label>
+            </div>
+            <div class="question">
+                <p>.46تحتوى قائمة  Libraryفي  Mendeleyعلى...... </p>
+                <label><input type="radio" name="mc46" value="1">1.	Recently Added </label>
+                <label><input type="radio" name="mc46" value="0">2.	Brand </label>
+                <label><input type="radio" name="mc46" value="0"> 3.Templet</label>
+                <label><input type="radio" name="mc46" value="0"> 4.Sign in</label>
+            </div>
+            <div class="question">
+                <p> .47لإنشاء مكتبة بداخلها كتب ومراجع في Mendeley يتم الضغط على أمر  Refrences....واختيار  Import Library</p>
+                <label><input type="radio" name="mc47" value="1">1.Add </label>
+                <label><input type="radio" name="mc47" value="0"> 2.New</label>
+                <label><input type="radio" name="mc47" value="0">3.Creat </label>
+                <label><input type="radio" name="mc47" value="0"> 4.Import</label>
+            </div>
+            <div class="question">
+                <p>48.لانشاء مجموعات في منصة Mendeley  يتم اختيار أمر... </p>
+                <label><input type="radio" name="mc48" value="0">A- Bibliography   Insert </label>
+                <label><input type="radio" name="mc48" value="1">B- Creat Group </label>
+                <label><input type="radio" name="mc48" value="0">c-Import </label>
+                <label><input type="radio" name="mc48" value="0">d- Cut </label>
+            </div>
+            <div class="question">
+                <p> 49.لعمل دعوة للباحثين للتعاون فيما بينهم فيMendeley يتم الضغط على Group واختيار أمر ....</p>
+                <label><input type="radio" name="mc49" value="0">A.Manage Group </label>
+                <label><input type="radio" name="mc49" value="0">B.Add Group </label>
+                <label><input type="radio" name="mc49" value="1"> c.Invite Group</label>
+                <label><input type="radio" name="mc49" value="0"> d.Add</label>
+            </div>
+            <div class="question">
+                <p> 50.لتغيير نمط اقتباس مرجع معين في Mendeley يتم الضغط على أمر …….</p>
+                <label><input type="radio" name="mc50" value="0">A.Cut as </label>
+                <label><input type="radio" name="mc50" value="1">B.Copy as </label>
+                <label><input type="radio" name="mc50" value="0">c.Add </label>
+                <label><input type="radio" name="mc50" value="0"> d.enter</label>
+            </div>
+            <div class="question">
+                <p>51.لحذف مجموعة فيMendeleyيتم الضغط على Group واختيار أمر... </p>
+                <label><input type="radio" name="mc51" value="1">A.Delete Group </label>
+                <label><input type="radio" name="mc51" value="0">B.Remove Group </label>
+                <label><input type="radio" name="mc51" value="0"> c.Exite</label>
+                <label><input type="radio" name="mc51" value="0">d.End </label>
+            </div>
+           
+            <!-- أضف باقي الـ 59 سؤال هنا بنفس الطريقة -->
+        </div>
+        <div class="section">
+            <h2> ثانيا: من نوع أسئلة الصواب والخطأ</h2>
+            <div class="question">
+                <p>1.	يعرف دمج التكنولوجيا في التعليم بأنه دمج بين التعلم الإلكتروني والتعليم التقليدي فقط  </P>
+                <label><input type="radio" name="tf1" value="0"> صح </label>
+                <label><input type="radio" name="tf1" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>2. تكمن أهمية دمج التكنولوجيا في التعليم في خلق بيئة تفاعلية بين المتعلمين وبعضهم  </P>
+                <label><input type="radio" name="tf2" value="1"> صح </label>
+                <label><input type="radio" name="tf2" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>3. من أهداف دمج التكنولوجيا في التعليم تطوير المحتوى الرقمي  </P>
+                <label><input type="radio" name="tf3" value="1"> صح </label>
+                <label><input type="radio" name="tf3" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>4. تعد مختبرات الحواسب الآلية احد متطلبات دمج التكنولوجيا في التعليم  </P>
+                <label><input type="radio" name="tf4" value="1"> صح </label>
+                <label><input type="radio" name="tf4" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>5. يعرف مفهوم مهارات دمج التكنولوجيا في التعليم بأنه توظيف وتفعيل الأدوات التقنية المتمثلة في الحاسب الآلي وتطبيقاته بالإضافة الى وجود بعض المهارات اللازمة  </P>
+                <label><input type="radio" name="tf5" value="1"> صح </label>
+                <label><input type="radio" name="tf5" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>6. يعد اكتساب المتدربين مزيد من الثقة من أهمية التدريب على مهارات دمج التكنولوجيا في التعليم  </P>
+                <label><input type="radio" name="tf6" value="1"> صح </label>
+                <label><input type="radio" name="tf6" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>7. تعد مهارات الثقافة الرقمية إحدى مهارات دمج التكنولوجيا في التعليم  </P>
+                <label><input type="radio" name="tf7" value="1"> صح </label>
+                <label><input type="radio" name="tf7" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>8. يتم في مرحلة التنفيذ تجريب الموقع/ البرنامج/ الكتاب التعليمي الذي تم إنتاجه، والوقوف على أية مشكلات قد تواجه استخدامه  </P>
+                <label><input type="radio" name="tf8" value="1"> صح </label>
+                <label><input type="radio" name="tf8" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>9. يتم الحكم على مدى جاهزية الموقع/ البرنامج / الكتاب التعليمي للاستخدام وذلك بإجراء التعديلات أو حل المشكلات التي صادفت تجريبه في مرحلة التنفيذ  </P>
+                <label><input type="radio" name="tf9" value="0"> صح </label>
+                <label><input type="radio" name="tf9" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>10.لإنشاء الواجبات في منصة Teams يتم الضغط على تبويب Homework  </P>
+                <label><input type="radio" name="tf10" value="0"> صح </label>
+                <label><input type="radio" name="tf10" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>11.تساعدك اعدادات الملفات المحملة في منصة Teams من مشاركة الملف بسهولة  </P>
+                <label><input type="radio" name="tf11" value="1"> صح </label>
+                <label><input type="radio" name="tf11" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>12.توفر منصة Teams مجموعة من التطبيقات المساعدة التي يمكن إضافتها مباشرة داخل المنصة  </P>
+                <label><input type="radio" name="tf12" value="1"> صح </label>
+                <label><input type="radio" name="tf12" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>13.يستخدم أمر Exit team في مغادرة الفصل الافتراضي في منصة Teams  </P>
+                <label><input type="radio" name="tf13" value="0"> صح </label>
+                <label><input type="radio" name="tf13" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>14.لابد من التأكد من قرار الحذف، حيث أن هذه الخطوة قد تكون غير قابلة للتراجع بعد إتمامها  </P>
+                <label><input type="radio" name="tf14" value="1"> صح </label>
+                <label><input type="radio" name="tf14" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>15.يعد قسم الأسئلة وكل ما يتعلق بها من مكونات واجهة العمل في Google Form  </P>
+                <label><input type="radio" name="tf15" value="1"> صح </label>
+                <label><input type="radio" name="tf15" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>16.من السهل تغيير اسم الاختبار في منصة Teams </P>
+                <label><input type="radio" name="tf16" value="0"> صح </label>
+                <label><input type="radio" name="tf16" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>17.يستخدم امر Randomise options لترتيب الخيارات بشكل عشوائي في Google Form </P>
+                <label><input type="radio" name="tf17" value="1"> صح </label>
+                <label><input type="radio" name="tf17" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>18. لايمكن إضافة قسم في Google Form      </P>
+                <label><input type="radio" name="tf18" value="0"> صح </label>
+                <label><input type="radio" name="tf18" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>19.يتيح Google Form تنزيل الردود على هيئة شيت اكسيل  </P>
+                <label><input type="radio" name="tf19" value="1"> صح </label>
+                <label><input type="radio" name="tf19" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>20.يحتوى شريط القوائم في Mendeley على مكتبة تحوى جميع المراجع والمصادر </P>
+                <label><input type="radio" name="tf20" value="1"> صح </label>
+                <label><input type="radio" name="tf20" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>21.إضافة ملف في Mendeley يتم الضغط على أمر Add Refrences واختيار   Export file  </P>
+                <label><input type="radio" name="tf21" value="0"> صح </label>
+                <label><input type="radio" name="tf21" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>22.إضافة مجلد في Mendeley يتم الضغط على أمر Add Refrences واختيار   Import Folder  </P>
+                <label><input type="radio" name="tf22" value="1"> صح </label>
+                <label><input type="radio" name="tf22" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>23.لإضافة مرجع يدويا في Mendeley يتم الضغط على أمر Add References واختيار أمر Add Reference Automatic  </P>
+                <label><input type="radio" name="tf23" value="0"> صح </label>
+                <label><input type="radio" name="tf23" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>24. من الممكن للمستخدم تعديل بيانات مرجع معين داخل Mendeley  </P>
+                <label><input type="radio" name="tf24" value="1"> صح </label>
+                <label><input type="radio" name="tf24" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>25.يستخدمNew group في Mendeley لإضافة الملفات وتنظيمها داخل مجموعات  </P>
+                <label><input type="radio" name="tf25" value="0"> صح </label>
+                <label><input type="radio" name="tf25" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>26.إذا لم تكن نتائج البحث غير مرغوب فيها، يمكن للمستخدم تعديل استعلام البحث عن طريق إضافة أو تغيير الكلمات الرئيسية، أو استخدام خيارات تصفية إضافية  </P>
+                <label><input type="radio" name="tf26" value="1"> صح </label>
+                <label><input type="radio" name="tf26" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>27. لضبط خصائص المرجع أو المصدر في Mendeley يتم تحديد المرجع أولا ثم ضبط اعداداته  </P>
+                <label><input type="radio" name="tf27" value="1"> صح </label>
+                <label><input type="radio" name="tf27" value="0"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>28. لتغيير نمط اقتباس مرجع معين في Mendeley يتم الضغط على أمر Add    </P>
+                <label><input type="radio" name="tf28" value="0"> صح </label>
+                <label><input type="radio" name="tf28" value="1"> خطأ </label>
+            </div>
+            <div class="question">
+                <p>29.لحذف مرجع فيMendeley يتم الضغط على المرجع كليك يمين واختيار أمر  Delete Group </P>
+                <label><input type="radio" name="tf29" value="0"> صح </label>
+                <label><input type="radio" name="tf29" value="1"> خطأ </label>
+            </div>
+            <!-- أضف باقي الـ 29 سؤال هنا بنفس الطريقة -->
+        </div>
+
+    </div>
+
+    <button onclick="submitTest()">تسليم</button>
+
+    <!-- Modal -->
+    <div class="modal" id="resultModal">
+        <div class="modal-content">
+            <h3 id="resultMessage"></h3>
+            <button onclick="closeModal()">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        let redirectPath = ""; // 🟡 سيتم تحديد المسار المناسب هنا حسب النتيجة
+
+function submitTest() {
+  let totalQuestions = 80; // عدّل هذا حسب عدد أسئلتك الفعلي
+  let correctAnswers = 0;
+
+  // اجمع كل الراديو المحدد
+  let selected = document.querySelectorAll('input[type="radio"]:checked');
+
+  selected.forEach(input => {
+    if (input.value === "1") {
+      correctAnswers++;
+    }
+  });
+
+  let percentage = Math.round((correctAnswers / totalQuestions) * 100);
+  let message = "";
+
+  if (percentage < 50) {
+    message = `حصلت على نسبة ${percentage}%. عزيزي المتدرب نسبتك لم تتجاوز الـ ٥٠٪ لذلك عليك دراسة المحتوى في البيئة التدريبية.`;
+    redirectPath = "dashboard1.html#content"; // 👈 مسار الراسب
+  } else {
+    message = `حصلت على نسبة ${percentage}%. عزيزي المتدرب نسبتك أعلى من ٥٠٪. لقد أجتزت التدريب بنجاح. نتمنى لك التوفيق.`;
+    redirectPath = "dashboard.html"; // 👈 مسار الناجح
+  }
+
+  // عرض الرسالة في النافذة
+  document.getElementById("resultMessage").innerText = message;
+  document.getElementById("resultModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("resultModal").style.display = "none";
+  // الانتقال بعد إغلاق الرسالة
+  if (redirectPath) {
+    window.location.href = redirectPath;
+  }
+}
+
+    </script>
+</body>
+</html>

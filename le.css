@@ -1,0 +1,405 @@
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f4f4f8;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #4a00e0;
+      color: #fff;
+      padding: 15px;
+    }
+    .logos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .logos img {
+      height: 60px;
+      width: auto;
+    }
+
+    .title-section {
+      padding: 1px;
+      text-align: center;
+      background: #eee;
+    }
+    .title-section h2 { color: #333; margin-bottom: 8px; }
+    .title-section .desc { margin-top: 8px; font-size: 8px; color: #555; }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background: #fff;
+      padding: 10px;
+      gap: 20px;
+      border-bottom: 2px solid #ddd;
+    }
+    .tabs button {
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 12px;
+      transition: all 0.3s;
+    }
+    .tabs button:hover {
+      color: #fff;
+      background: #4a00e0;
+      border-radius: 6px;
+    }
+    .tabs button.active {
+      border-bottom: 3px solid #4a00e0;
+      color: #4a00e0;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+    .content {
+      flex: 3;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      min-height: 300px;
+    }
+    .sidebar {
+      flex: 1;
+      background: #dfe9ff;
+      padding: 20px;
+      border-radius: 10px;
+      order: -1;
+    }
+    .sidebar h3 {
+      margin-bottom: 15px;
+    }
+    .sidebar .announcement button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      background-color: #4a00e0;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .sidebar .announcement button:hover {
+      background-color: #3700b3;
+    }
+
+    .additional-info {
+      text-align: center;
+      margin: 10px auto 10px;
+    }
+    .additional-info h3 {
+      color: #444;
+      margin-bottom: 10px;
+    }
+    .additional-info img.center-image {
+      width: 100px;
+      margin: 10px auto;
+      display: block;
+    }
+    .supervision-images {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .supervision-images img {
+      height: 80px;
+    }
+    #logout {
+  background-color: #6a1b9a; /* بنفسجي فاتح */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s ease;
+}
+
+#logout:hover {
+  background-color: #4a0072; /* أغمق عند المرور */
+}
+.infographic-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.infographic-container img {
+  max-width: 50%;
+  height: auto;
+  border: 3px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.infographic-container img:hover {
+  transform: scale(1.02);
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.objectives-heading {
+  font-size: 22px;
+  font-weight: bold;
+  color: #4a00e0;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fadeInUp 1s ease forwards;
+  background: linear-gradient(to right, #ece9f0, #f4f4f8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+
+/* دليل المتدرب */
+.guide-section {
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100%;
+}
+
+.guide-intro {
+  font-size: 12.5px;
+  color: #333;
+  background-color: #f9f9fc;
+  border-right: 4px solid #673ab7;
+  padding: 8px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  max-width: 90%;
+  animation: fadeInUp 1s ease;
+}
+
+/* زر وصورة بجانب بعض */
+.guide-flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* الصورة */
+.guide-image img {
+  max-width: 300px;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* الزر */
+.guide-button {
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.guide-button:hover {
+  background-color: #4e299b;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-btn {
+    background-color: #5e07ff;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .dropdown-content a:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover .dropdown-btn {
+    background-color: #240cfc;
+  }
+
+  .tab-content {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+/* التقويم */
+.calendar-dropdown-menu {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.calendar-dropdown-menu button {
+  background-color: #4a00e0;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.calendar-dropdown-menu button:hover {
+  background-color: #3700b3;
+}
+
+.calendar-pre-class,
+.calendar-post-class {
+  background-color: #f9f9fc;
+  padding: 15px;
+  border-radius: 10px;
+  color: #333;
+  line-height: 1.8;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* المحتوى التعليمي */
+.content-tab:hover {
+  background-color: #3f51b5;
+  color: #fff;
+  border-radius: 6px;
+}
+.content-tab.active {
+  color: #3f51b5;
+  border-bottom: 3px solid #3f51b5;
+}
+
+/* اتصل بنا */
+.contact-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(90deg, #e3e8ff, #f3f5ff);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease-in-out;
+}
+
+.contact-info {
+  flex: 1;
+  text-align: right;
+  font-size: 15px;
+  color: #222;
+  line-height: 2;
+}
+
+.contact-info a {
+  color: #4a00e0;
+  text-decoration: none;
+}
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.contact-image img {
+  max-width: 120px;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.contact-image img:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+ 

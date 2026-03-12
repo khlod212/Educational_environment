@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>بيئة تدريبية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+  <style>
+    /* نسخ جميع التنسيقات الخاصة بك هنا (قصيرة للحجم هنا) */
+    body {font-family: 'Cairo', sans-serif; background: #f4f4f8; display: flex; flex-direction: column; min-height: 80vh;}
+    header {background: #4a00e0; color: #fff; padding: 0px;}
+    .logos {display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: auto;}
+    .logos img {height: 40px;}
+      .my-custom-size {
+  font-size: 15px; /* أو أي حجم تريده */
+}
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background: #fff;
+      padding: 5px;
+      gap: 20px;
+      border-bottom: 2px solid #dddddd;
+      position: relative;
+    }
+    .tabs a, .tabs .dropdown-btn {
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 12px;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: #333;
+    }
+    .tabs a:hover, .tabs .dropdown-btn:hover {
+      color: #fff;
+      background: #4a00e0;
+      border-radius: 6px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background-color: #fff;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background 0.3s;
+    }
+    .dropdown-content a:hover {
+      background-color: #4a00e0;
+      color: #fff;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .tabs button.active {border-bottom: 3px solid #4a00e0; color: #4a00e0;}
+    .main {flex: 1; display: flex; padding: 2px; gap: 4px;}
+    .content {flex: 3; background: #fff; padding: 7px; border-radius: 10px; min-height: 300px;}
+    .sidebar {
+  width: 150px; /* عرض ثابت للقائمة الجانبية */
+  background: #dfe9ff;
+  padding: 10px;
+  border-radius: 10px;
+  flex: none; /* لمنع التمدد مع flex */
+}
+
+
+.sidebar button,
+.sidebar .dropdown-btn {
+  width: 100%;
+  margin: 8px auto;
+  background-color: #4a00e0;
+  color: white;
+  border: none;
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  display: block;
+}
+
+.sidebar button:hover,
+.sidebar .dropdown-btn:hover {
+  background-color: #3700b3;
+}
+
+/* لو تحب أيضا تنسيق الأزرار داخل القائمة المنسدلة */
+.sidebar .dropdown-content button {
+  width: 90%;
+  margin: 8px auto;
+  background-color: #4a00e0;
+  color: white;
+  border: none;
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+}
+.sidebar .dropdown-content button:hover {
+  background-color: #3700b3;
+}
+
+
+
+    .dropdown-content {display: none; flex-direction: column;}
+    .dropdown:hover .dropdown-content {display: flex;}
+    .titltion {
+    padding: 1px;
+    text-align: center;
+    background: #eee;
+  }
+
+  .titltion h2 {
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 18px; /* يمكنك تعديله حسب الحاجة */
+  }
+
+  .titltion .desc {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #555;
+  }
+  
+  /*المقدمه الموديول---------------------------------------------------------------------------*/
+  .intro2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  padding: 25px 35px;
+
+  width: fit-content;
+  max-width: 80%;
+  margin: 40px auto 0 auto; /* نزله قليلا من الأعلى */
+  
+  text-align: center;
+  background-color: #f9f9fc;
+  line-height: 1.8;
+  font-size: 15px;
+  color: #333;
+}
+
+.highlight {
+  color: #007bff;
+  font-weight: bold;
+}
+
+ 
+
+.intro1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  border: 2px solid #007bff; /* إطار أزرق */
+  border-radius: 8px;
+  padding: 20px 30px;
+
+  width: fit-content;
+  max-width: 90%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  text-align: center;
+  background-color: #f9f9fc;
+}
+
+
+
+
+
+
+/*أهداف الموديول الأول*/
+.objectives-new-container {
+  background: #f9f9fc;
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  padding: 15px 20px; /* قلل البادينغ العلوي والسفلي */
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  animation: fadeInNew 1.2s ease;
+  text-align: center;
+}
+
+.objectives-title {
+  color: #4a00e0;
+  font-size: 22px;
+  margin-bottom: 10px; /* قلل المسافة تحت العنوان */
+  margin-top: 0; /* ازالة أي هامش علوي زائد */
+}
+
+.objectives-flex {
+  display: flex;
+  align-items: flex-start; /* ليبدأوا من نفس الخط العلوي */
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.objectives-text-new {
+  display: inline-block; /* ليكون حجمه على حجم النص فقط */
+  font-size: 17px;
+  line-height: 2;
+  color: #333;
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+
+  text-align: right;
+}
+
+
+.objectives-infographic img {
+  max-width: 600px; /* كبرنا العرض */
+  width: 200%;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+
+
+@media (max-width: 700px) {
+  .objectives-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .objectives-infographic img {
+    max-width: 90%;
+  }
+}
+@keyframes fadeInNew {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .objectives-flex {
+    flex-direction: column;
+  }
+}
+
+/*دروس الموديول الأول*/
+.lessons-module-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.module-title {
+  font-size: 24px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.module-title img.title-icon {
+  width: 28px;
+}
+
+.lessons-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.lesson-item {
+  width: 180px;
+  padding: 15px;
+  border-radius: 12px;
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  transition: transform 0.3s;
+}
+
+.lesson-item:hover {
+  transform: translateY(-5px);
+}
+
+.lesson-top-icon {
+  background: #fff;
+  border-radius: 50%;
+  padding: 8px;
+  width: 50px;
+  height: 50px;
+  margin: -40px auto 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lesson-top-icon img {
+  width: 30px;
+}
+
+.lesson-text h4 {
+  margin: 10px 0 5px;
+  font-size: 16px;
+}
+
+.lesson-text p {
+  font-size: 13px;
+}
+
+.lesson-line {
+  height: 30px;
+  width: 2px;
+  background: #fff;
+  margin: 8px auto;
+}
+
+.lesson-number {
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  color: #333;
+  border-radius: 50%;
+  line-height: 24px;
+  font-size: 13px;
+  margin: 0 auto;
+}
+
+/* ألوان كل درس */
+.lesson-purple {
+  background: linear-gradient(135deg, #7e3ff2, #9346e3);
+}
+
+.lesson-blue {
+  background: linear-gradient(135deg, #2a6ef3, #4c8af5);
+}
+
+.lesson-cyan {
+  background: linear-gradient(135deg, #00b6ad, #2fc9c0);
+}
+
+/*   مقدمه درس 1 */
+.intro-box {
+  background: #f9f9ff;
+  border: 2px solid #dedcff;
+  border-radius: 15px;
+  padding: 25px;
+  max-width: 600px;
+  margin: 30px auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: right;
+  direction: rtl;
+}
+
+.intro-box h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #5d47d8;
+}
+
+.intro-box p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+/* تأثير ظهور ناعم */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* تأثير عند التمرير */
+.intro-box:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
+  transition: all 0.3s ease;
+}
+
+
+/*أهداف الدرس 1*/
+.objectives-flex-box {
+  background: #f9f9ff;
+  border: 2px solid #dedcff;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 800px;
+  margin: 17px auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  direction: rtl;
+  transition: all 0.3s ease;
+}
+
+.objectives-flex-box:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
+}
+
+/* العنوان في المنتصف */
+.center-title {
+  text-align: center;
+  font-size: 18px;
+  margin: 0 0 15px 0;
+  color: #5d47d8;
+}
+
+/* الصف الذي فيه النص والصورة */
+.objectives-content-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* النص */
+.objectives-text {
+  flex: 1;
+  margin-right: 70px; /* مسافة من يمين النص */
+  max-width: 300px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* الصورة */
+.objectives-img-side {
+  flex: 1;
+  text-align: left;
+  margin-left: 200px; /* مسافة من يسار الصورة */
+}
+
+.objectives-img-side img {
+  width: 500px;
+  height: 500px;
+  max-height: 250px;
+  border-radius: 0px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .objectives-content-row {
+    flex-direction: column;
+    text-align: center;
+  }
+  .objectives-text {
+    max-width: 100%;
+    margin: 0 0 15px 0;
+  }
+  .objectives-img-side {
+    text-align: center;
+    margin-left: 0; /* إزالة المسافة في الشاشات الصغيرة */
+  }
+}
+
+/* انيميشن */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*الدرس الأول  التقويم القبلي*/
+.lessoncalendar1-box {
+  max-width: 600px;
+  margin: 0 auto; /* هنا حذفنا الهامش العلوي */
+  padding: 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: right;
+  font-family: 'Cairo', sans-serif;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s forwards;
+}
+
+
+.lessoncalendar1-box h3 {
+  text-align: center;
+  color: #8e44ad;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.lessoncalendar1-box p,
+.lessoncalendar1-box ol {
+  font-size: 17px;
+  color: #555;
+  line-height: 1.7;
+}
+
+.lessoncalendar1-box ol {
+  padding-right: 25px;
+  margin-bottom: 25px;
+}
+
+.lessoncalendar1-box button {
+  display: block;
+  margin: 0 auto;
+  padding: 14px 15px;
+  background: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.lessoncalendar1-box button:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* تنسيق صفحه اسئله التقويم القبلي للدرس الأول */
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+.lessoncalendaar1-box {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: 'Cairo', sans-serif;
+}
+
+.flex-container {
+  display: flex;
+  gap: 20px;
+}
+
+.mcq-section, .tf-section {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.mcq-section h4, .tf-section h4 {
+  color: #8e44ad;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.question {
+  margin-bottom: 15px;
+}
+
+.question p {
+  margin: 5px 0;
+}
+
+.submit-btn {
+  display: block;
+  margin: 30px auto 0;
+  padding: 12px 30px;
+  background: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.submit-btn:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.modal-content {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 12px;
+  text-align: center;
+}
+.modal-content button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  background: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.modal-content button:hover {
+  background: #0056b3;
+}
+
+/*عناصر الدرس*/
+/*هدف الدرس الأول-----------------------------------------------------------------------*/
+
+.lessonObjectives1 .objectives-new-container {
+  display: flex;
+  width: 90%;
+  height: 60vh; /* أو أي ارتفاع يناسبك */
+  direction: rtl;
+}
+
+.lessonObjectives1 .objectives-content-row {
+  display: flex;
+  width: 100%;
+}
+
+/* النصف الأيمن للنص */
+.lessonObjectives1 .objectives-text {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  font-size: 18px;
+  text-align: center;
+  color: #333;
+  background-color: #f9f9ff;
+}
+
+/* النصف الأيسر للصورة */
+.lessonObjectives1 .objectives-img-side {
+  flex: 1;
+}
+
+.lessonObjectives1 .objectives-img-side img {
+  width: 500px;
+  height: 450px;
+  object-fit: cover; /* لضمان تغطية كاملة */
+}
+
+
+/*الهدف الأول*/
+
+.lesson1_T1-row {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  flex-wrap: wrap; /* استجابة للشاشات الصغيرة */
+}
+
+.lesson1_T1-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+  padding-right: 80px;
+}
+
+/* الحاوية للفيديو */
+.lesson1_T1-video {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 150px; /* مسافة بسيطة من اليسار */
+  box-sizing: border-box;
+}
+
+/* تكبير الفيديو لملء نصف العرض تقريبًا بدون تمرير */
+.lesson1_T1-video iframe {
+  width: 600px;
+  height: 400px;
+  max-width: 600px;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* استجابة للشاشات الصغيرة */
+@media (max-width: 768px) {
+  .lesson1_T1-row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .lesson1_T1-text {
+    padding: 0 20px;
+  }
+
+  .lesson1_T1-video {
+    padding: 0;
+  }
+
+  .lesson1_T1-video iframe {
+    width: 90%;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/*-----------------------جزء مكونات منصه تيمز ----------------------*/
+
+.lesson1_T2_22 {
+  display: flex;
+  direction: rtl;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: 60vh;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden; /* لا شريط تمرير */
+}
+
+/* النص */
+.lesson1_T2_22-text {
+  flex: 1;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.5;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* النقاط المرقمة */
+.lesson1_T2_22-text ol {
+  margin: 0;
+  padding-right: 20px;
+  list-style-position: inside;
+}
+
+.lesson1_T2_22-text ol li {
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* الصورة */
+.lesson1_T2_22 img {
+  flex: 1;
+  max-width: 530px;
+  max-height: 530px;
+  object-fit: contain; /* يعرض الصورة كاملة دون اقتطاع */
+  border-radius: 10px;
+  transition: transform 0.5s ease;
+}
+
+
+
+/* أهمية دمج التكنولوجيا في التعليم ------------------------------------------------------------*/
+
+.lesson1_T2 {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.lesson1_T2-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+}
+
+.lesson1_T2 img {
+  flex: 1;
+  width: 60%;
+  height: 50%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+
+
+/*  أهداف دمج التكنولوجيا في التعليم -----------------------------------------------------  */
+
+.lesson1_T3 {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.lesson1_T3-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+}
+
+.lesson1_T3 img {
+  flex: 1;
+  width: 358px;
+  height: 380px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+
+/*  متطلبات دمج التكنولوجيا في التعليم  ---------------------------------- */
+.intro-box-lesson1_T4 {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.title-lesson1_T4 {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.8;
+}
+
+.img-box-lesson1_T4 {
+  flex: 1;
+}
+
+.img-lesson1_T4 {
+  width: 75%;
+  height: 70%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+
+
+/*   مقومات نجاح دمج التكنولوجيا في التعليم:- ----------------------- */
+
+.intro-box-lesson1_T5 {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.title-lesson1_T5 {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+}
+
+.img-box-lesson1_T5 {
+  flex: 1;
+}
+
+.img-lesson1_T5 {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/*-----------------------------------------*/
+
+
+
+/*     *//*     */
+button {
+  padding: 8px 12px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  margin: 2px;
+}
+
+button:hover {
+  background: #f0f0f0;
+}
+
+button.active {
+  background: #cce4ff; /* أزرق فاتح */
+  color: #004080;
+  border-color: #99ccff;
+}
+
+/*   النشاط  */
+.lesson1_T7 {
+  max-width: 700px;
+  margin: 80px auto; /* وسط الصفحة مع مسافة من الأعلى */
+  padding: 20px 30px;
+  border: 2px solid #4a00e0;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.lesson1_T7 h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #4a00e0;
+}
+
+.lesson1_T7 ol {
+  text-align: right;
+  margin: 0 auto 20px;
+  padding-right: 20px;
+}
+
+.lesson1_T7 button {
+  padding: 8px 25px;
+  font-size: 15px;
+  background-color: #2a51d1;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.lesson1_T7 button:hover {
+  background-color: #060399;
+}
+
+
+/*   -----------------------------------------------------الدرس الثاني ---------------------------------------------------  */
+
+
+
+
+/*اهداف الدرس*/
+.lessonObjectives2_2_2 {
+  width: 100%;
+  height: 70vh; /* يملأ الشاشة دون تمرير */
+  overflow: hidden;
+  direction: rtl;
+  box-sizing: border-box;
+}
+
+.lessonObjectives2_2_2-new-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.lessonObjectives2_2_2-content-row {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* النصف الأيمن للنص */
+.lessonObjectives2_2_2-text {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: center;
+  color: #333;
+  background-color: #f9f9ff;
+  box-sizing: border-box;
+}
+
+/* النصف الأيسر للصورة */
+.lessonObjectives2_2_2-img-side {
+  flex: 1;
+  height: 80%;
+  overflow: hidden;
+}
+
+.lessonObjectives2_2_2-img-side img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover; /* تملأ الحاوية بالكامل بدون تشويه */
+  display: block;
+}
+
+/* استجابة للشاشات الصغيرة */
+@media (max-width: 768px) {
+  .lessonObjectives2_2_2-new-container {
+    flex-direction: column;
+  }
+
+  .lessonObjectives2_2_2-text {
+    padding: 20px;
+    font-size: 16px;
+  }
+
+  .lessonObjectives2_2_2-img-side {
+    height: auto;
+  }
+
+  .lessonObjectives2_2_2-img-side img {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/*---------------------------------------*/
+.lesson2_T4 {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.lesson2_T4-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+}
+
+.lesson2_T4 img {
+  flex: 1;
+  width: 300px;
+  height: 350px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+
+/*-------------------------------------------------------------------------------------------*/
+.lesson2_T5 {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.lesson2_T5-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+}
+
+.lesson2_T5 img {
+  flex: 1;
+  width: 360px;
+  height: 360px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/*----------------------------*/
+.lesson2_T6 {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.lesson2_T6-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+}
+
+/* تصغير الصورة + أنيميشن */
+.lesson2_T6 img {
+  flex: 1;
+  width: 400px;
+  height: auto;
+  max-height: 400px;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+/*   -----------------------------------------------------الدرس الثالث ---------------------------------------------------  */
+
+.lesson3_T4 {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.lesson3_T4-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+}
+
+.lesson3_T4 img {
+  flex: 1;
+  width: 350px;       /* تصغير الحجم */
+  height: 350px;
+  border-radius: 8px;
+  object-fit: contain; /* بدون اقتطاع */
+}
+
+/*     */
+.lesson3_T5 {
+  display: flex;
+  gap: 20px;
+  direction: rtl;
+  align-items: center;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.lesson3_T5-text {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+}
+
+.lesson3_T5 img {
+  flex: 1;
+  width: 300px;       /* تصغير الحجم */
+  height: 300px;
+  border-radius: 8px;
+  object-fit: contain; /* بدون اقتطاع */
+}
+/*     */
+
+/*     */
+
+  </style>
+</head>
+<body> 
+<header>
+  <div class="logos">
+    <img src="Photo/q2.jpg" alt="Logo 1">
+    <h5 class="my-custom-size"> بيئة تدريبية قائمة على محفزات الألعاب الرقمية لتنمية بعض مهارات دمج التكنولوجيا في التعليم لدى أعضاء الهيئة المعاونة بكلية التربية النوعية</h5>
+    <img src="Photo/q3.jpg" alt="Logo 3">
+  </div>
+</header>
+    <div class="desc">
+<nav class="tabs">
+  <a href="dashboard1.html#home">الصفحة الرئيسية</a>
+    <a href="dashboard1.html#objectives">أهداف البيئة</a>
+    <a href="dashboard1.html#guide">دليل المتدرب</a>
+    <div class="dropdown">
+      <button class="dropdown-btn">التقويم ▼</button>
+      <div class="dropdown-content">
+        <a href="dashboard1.html#calendar">📌 التقويم القبلي</a>
+        <a href="dashboard1.html#calend">📌 التقويم البعدي</a>
+      </div>
+    </div>
+    <a href="dashboard1.html#content">المحتوى التعليمي</a>
+    <a href="dashboard1.html#contact">اتصل بنا</a>
+    <button id="logout"> تسجيل الخروج</button>
+  </nav>
+
+<div class="main">
+  <div class="sidebar" id="sidebar">
+    <button onclick="setActiveButton(this); showIntro()">مقدمة الموديول</button>
+    <button onclick="setActiveButton(this); showObjectives()">أهداف الموديول</button>
+
+    <div class="dropdown">
+      <button class="dropdown-btn">دروس الموديول</button>
+      <div class="dropdown-content">
+        <button onclick="loadLesson(1)"> 	الدرس الأول:   تسجيل الدخول الى  Google Form 	 </button>
+        <button onclick="loadLesson(2)">  	الدرس الثانى:  إضافة اسئلة للاختبار في Google Form </button>
+        <button onclick="loadLesson(3)"> 	الدرس الثالث:   ضبط إعدادات للاختبار فيGoogle Form  . </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="intro1">
+           الموديول  الثالث " التمكن من مهارات إنشاء اختبار الكتروني  باستخدام     Google Form  " 
+    </div>
+  </div>
+</div>
+
+<script>
+    //مقدمه المديول الثاني 
+function showIntro() {
+  document.getElementById("content").innerHTML = `
+    <div class="intro2">
+      <p>
+         عزيزي المتدرب تتمثل أهمية هذا الموديول في  تكمن أهمية الحصول على المحتوى التعليمي الخاص بهذا الموديول في  معرفة وإتقان خطوات إنشاء اختبار الكتروني ومعرفة كيفية إنشاء الواجبات والتكليفات والتقييمات الذاتية واستطلاعات الرأى باستخدام  Google Form..
+      </p>
+    </div>
+  `;
+}
+
+
+//أهداف الموديول الثاني
+function showObjectives() {
+  document.getElementById("content").innerHTML = `
+    <div class="objectives-new-container">
+      <h3 class="objectives-title">  </h3>
+      <div class="objectives-flex">
+        <div class="objectives-text-new">
+           <span class="highlight"> </span><br><br>
+          • تتمثل أهداف دراسة الموديول الثالث في:
+        </div>
+        <div class="objectives-infographic">
+          <img src="Photo/unit3/AHDAF.png" alt="إنفوجرافيك الموديول">
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+//دروس الموديول الثاني
+
+/*------------------------------------الدرس الأول -------------------------------------*/
+
+function lessonIntro1() {
+  document.getElementById("content").innerHTML = `
+    <div class="intro-box fade-in">
+      <p>
+الدرس الاول : تسجيل الدخول الى  Google Form الذي يشتمل على معرفة  كيفية تسجيل الدخول في Google Form  ومعرفةوأهم المكونات الموجودة بالواجهة الرئيسية .      </p>
+    </div>
+  `;
+}
+ 
+function lessonObjectives1() {
+  document.getElementById("content").innerHTML = `
+    <div class="lessonObjectives1" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     الموديول الثالث-الدرس الأول:    تسجيل الدخول الى  Google Form     
+  </div>
+      <div class="objectives-new-container">
+        <div class="objectives-content-row">
+          <div class="objectives-text">
+            بعد دراستك لهذا الدرس والتدرب على مفرداته والقيام بأنشطة التعلم المصاحبة، يجب أن تكون قادراً على أن:
+          </div>
+          <div class="objectives-img-side">
+            <img src="Photo/unit3/L1/HADF.png" alt="أهداف الدرس" />
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+
+
+//عناصر الدرس
+function lesson1_T1() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     الموديول الثالث-الدرس الأول: تسجيل الدخول الى  Google Form        
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+      لتسجيل الدخول ألي Google Form يتبع الأتي :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/xr1vR2rF1Wk" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+
+
+
+
+function lesson1_T2() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     الموديول الثالث-الدرس الأول: تسجيل الدخول الى  Google Form        
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+     لإنشاء اختبار جديد في google form  يتبع الآتي :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/D_HyXW9oprA" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+
+
+  `;
+}
+
+
+function lesson1_T3() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T2_22" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+    الموديول الثالث-الدرس الأول: تسجيل الدخول الى  Google Form    
+  </div>
+  <div class="lesson1_T2_22-text">
+    <l<div class="lesson1_T2_22">
+  <div class="lesson1_T2_22-text">
+    <ol>مكونات  واجهة العمل في   Google Form 
+      <li>   اسم الاختبار</li>
+      <li> تبويب الأسئلة  Question: لإنشاء اسئلة داخل الاختبار </li>
+      <li>  تبويب الردودResponses:لمعرفة التحليل الاحصائي للردود وكم عدد الردود المتاحة </li>
+      <li>  تبويب الاعداداتsettings: لضبط اعدادات الاختبار وكل ما يتعلق به </li>
+      <li>  اداة (المظهر)Theme: لتغيير مظهر الاختبار من حيث اللون والخلفية </li>
+      <li>  أداة المعاينة (Preview):لرؤية ومعاينة الاختبار قبل النشر</li>
+      <li> أداة العودة والرجوع (undo,Redo): للعودة او الرجوع عن آخر تعديل قمت به </li>
+      <li>  أداة نسخ رابط الاختبار(Copy link): لنسخ رابط الاختبار وارساله للطلبة </li>
+      <li>   أداة المشاركة (Share): لمشاركة الاختبار</li>
+      <li> أداة النشر (Publish): لنشر الاختبار على مواقع التواصل الاجتماعي </li>
+      <li>  مجموعة نقاط (More options): إذا اردت اعدادات اكثر للاختبار </li>
+      <li>  الملف التعريفي (الحساب الشخصي الخاص بك) </li>
+    </ol>
+  </div>
+  <img src="Photo/unit3/L1/trkep.jfif" alt="صورة">
+</div>
+  `;
+}
+
+
+function lesson1_T4() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+      الموديول الثالث-الدرس الأول: تسجيل الدخول الى  Google Form   
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+       لتسمية أو تغيير الاختبار في Google Form يتبع الآتي:
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/mniV_1hwgZo" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+
+    
+  `;
+}
+
+
+function lesson1_T5() {
+    document.getElementById('activityBtn').dataset.enabled = 'true';
+document.getElementById('selfEvalBtn').dataset.enabled = 'true';
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+      الموديول الثالث-الدرس الأول: تسجيل الدخول الى  Google Form    
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+       لادراج صورة للاختبار في Google Form يتبع الآتي:       
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/GXJhouYY9pk" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+
+
+function lesson1_T7() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T7" style="position: relative;">
+  <div style="position: absolute; top: -75px; right: -195px; font-size: 8px; margin: 0; padding: 0;">
+     الموديول الثاني-الدرس الأول: تسجيل الدخول في منصة Teams  
+  </div>
+    <center>
+من خلال فهمك لمهارات دمج التكنولوجيا في التعليم وبالتحديد   مهارات التقويم الالكتروني باستخدام منصة Google form ، قم بحل النشاط التالي
+
+</center>
+
+ 
+  </ol>
+  <button onclick="window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit3/activities3_1.html'">بدء</button>
+</div>
+
+  `;
+}
+
+////////
+function loadLessonTabs(lesson) {
+  let sidebar = document.getElementById("sidebar");
+  let content = document.getElementById("content");
+
+  if(lesson === 1) {          
+    sidebar.innerHTML = `<h5 style="margin-bottom: 1px; color: #4a00e0;">  عناصر الدرس:</h5>
+      <button onclick="setActiveButton(this); lesson1_T1()"> •	تسجيل الدخول في Google Form  </button>
+      <button onclick="setActiveButton(this); lesson1_T2()"> •	إنشاء اختبار جديد في  Google Form</button>
+      <button onclick="setActiveButton(this); lesson1_T3()">•	 تحديد مكونات واجهة العمل في  Google Form </button>
+      <button onclick="setActiveButton(this); lesson1_T4()">•	تغيير اسم الاختبار في Google Form </button>
+      <button onclick="setActiveButton(this); lesson1_T5(); enableButtons()"> •	ادراج صورة للاختبار في Google Form .</button>
+       
+      <button id="activityBtn" data-enabled="false" data-message-shown="false"
+  onclick="
+    if (this.dataset.enabled === 'false') {
+      if (this.dataset.messageShown === 'false') {
+        alert('عليك أجتياز عناصر الدرس أولا');
+        this.dataset.messageShown = 'true';
+      }
+    } else {
+      setActiveButton(this);
+      lesson1_T7();
+    }
+  ">النشاط</button>
+
+<button id="selfEvalBtn" data-enabled="false" data-message-shown="false"
+  onclick="
+    if (this.dataset.enabled === 'false') {
+      if (this.dataset.messageShown === 'false') {
+        alert('عليك أجتياز النشاط أولا');
+        this.dataset.messageShown = 'true';
+      }
+    } else {
+      window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit3/Self-evaluation3_1.html';
+    }
+  ">التقويم الذاتي</button>
+
+    `;
+    content.innerHTML = `
+  <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     الموديول الثالث-الدرس الأول: تسجيل الدخول الى  Google Form        
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+      لتسجيل الدخول ألي Google Form يتبع الأتي :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/xr1vR2rF1Wk" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+
+`;
+  }
+}
+/*----------------------------الدرس الثاني ------------------------------------------------------------------*/
+
+function lessonObjectives2_1() {
+  document.getElementById("content").innerHTML = `
+    <div class="lessonObjectives2_2_2" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+    الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .    
+  </div>
+      <div class="lessonObjectives2_2_2-new-container">
+        <div class="lessonObjectives2_2_2-content-row">
+          <div class="lessonObjectives2_2_2-text">
+         
+            بعد دراستك لهذا الدرس والتدرب على مفرداته والقيام بأنشطة التعلم المصاحبة، يجب أن تكون قادراً على أن:   
+
+            </div>
+          <div class="lessonObjectives2_2_2-img-side">
+            <img src="Photo/unit3/L2/hadf.png" alt="أهداف الدرس" />
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+
+
+function lesson2_T1() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+  الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .     
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+       لإضافة أسئلة للاختبار في Google Form يتبع الآتي :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/YKCzJd5eiIE" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson2_T2() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .     
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+        لإضافة سؤال اختر من متعدد فيGoogle Form يتبع الآتي :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/ptMuXrbJ0mY" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson2_T3() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .     
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+     لترتيب الاختيارات بشكل عشوائي في Google Form يتبع الآتي :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/7zzXwX1TZFI" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson2_T4() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .   
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+    لتغيير مظهر الاختبار. في Google Form يتبع الآتي:
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/3mS1OT7HNJE" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson2_T5() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .     
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+            لنسخ سؤال داخل الاختبار فيGoogle Form يتبع الآتي:
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/mUUKzzJoMjg" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson2_T7() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .     
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+    لحذف سؤال داخل الاختبار  في Google Form يتبع الآتي :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/4mMKyTTeFzY" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson2_T6() {
+  // تفعيل الأزرار
+    document.getElementById('activityBtn').dataset.enabled = 'true';
+    document.getElementById('selfEvalBtn').dataset.enabled = 'true';
+
+  // المحتوى المعروض
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+    الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .     
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+     لإضافة قسم داخل الاختبار  في Google Form  يتبع الآتي   :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/3TFwYj4a9oQ" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+
+
+function lesson2_T8() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T7" style="position: relative;">
+  <div style="position: absolute; top: -75px; right: -195px; font-size: 8px; margin: 0; padding: 0;">
+   الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .      
+  </div>
+
+    <center>
+من خلال فهمك لمهارات دمج التكنولوجيا في التعليم وبالتحديد   مهارات التقويم الالكتروني باستخدام منصة Google form ، قم بحل النشاط التالي
+</center>
+
+ 
+  </ol>
+  <button onclick="window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit3/activities 3_2.html'">بدء</button>
+</div>
+  `;
+}
+
+////////
+function loadLessonTabs2() {
+  let sidebar = document.getElementById("sidebar");
+  let content = document.getElementById("content"); 
+ 
+  sidebar.innerHTML = `                 
+    <h5 style="margin-bottom: 1px; color: #4a00e0;">عناصر الدرس الثاني:</h5>
+    <button onclick="setActiveButton(this); lesson2_T1()">	 •	إضافة اسئلة للاختبار في Google Form   </button>
+    <button onclick="setActiveButton(this); lesson2_T2()">•	إضافة سؤال( اختيار من متعدد ) في Google Form 	   </button>
+    <button onclick="setActiveButton(this); lesson2_T3()"> •	ترتيب الاختيارات بشكل عشوائي في Google Form  </button>
+    <button onclick="setActiveButton(this); lesson2_T4()"> 	•	إنشاء مظهر جديد للاختبار في Google Form  </button>
+    <button onclick="setActiveButton(this); lesson2_T5()">   •	نسخ سؤال داخل الاختبار  في Google Form </button>
+    <button onclick="setActiveButton(this); lesson2_T7()"> •	إضافة قسم الى الاختبار في Google Form   </button>
+    <button onclick="setActiveButton(this); lesson2_T6()"> •	حذف سؤال في Google Form   </button>
+    <button id="activityBtn" data-enabled="false" data-message-shown="false"
+  onclick="
+    if (this.dataset.enabled === 'false') {
+      if (this.dataset.messageShown === 'false') {
+        alert('عليك أجتياز عناصر الدرس أولا');
+        this.dataset.messageShown = 'true';
+      }
+    } else {
+      setActiveButton(this);
+      lesson2_T8();
+    }
+  ">النشاط</button>
+
+<button id="selfEvalBtn" data-enabled="false" data-message-shown="false"
+  onclick="
+    if (this.dataset.enabled === 'false') {
+      if (this.dataset.messageShown === 'false') {
+        alert('عليك أجتياز النشاط أولا');
+        this.dataset.messageShown = 'true';
+      }
+    } else {
+      window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit3/Self-evaluation3_2.html';
+    }
+  ">التقويم الذاتي</button>
+  `;
+
+  content.innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+  الموديول الثالث-الدرس الثاني:   إضافة اسئلة للنموذج في Google Form .     
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+       لإضافة أسئلة للاختبار في Google Form يتبع الآتي :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/YKCzJd5eiIE" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//------------------------------------------------------------------------------------------------
+
+///////////////// -------------------------------------  الدرس الثالث  -----------------------------------------------///////////////
+function loadLessonTabs3() {
+  let sidebar = document.getElementById("sidebar"); 
+  let content = document.getElementById("content");           
+
+  sidebar.innerHTML = `
+    <h5 style="margin-bottom: 1px; color: #4a00e0;">عناصر الدرس الثالث:</h5>
+    <button onclick="setActiveButton(this); lesson3_T1()">  •	ضبط إعدادات الاختبار فيGoogle Form</button>
+    <button onclick="setActiveButton(this); lesson3_T2()"> •	مشاهدة الردود على الاختبار في Google Form</button>
+    <button onclick="setActiveButton(this); lesson3_T3()"> •	نسخ رابط الاختبار في Google Form لارساله للطلبة </button>
+    <button onclick="setActiveButton(this); lesson3_T4()"> •	معاينة الاختبار في Google Form	 </button>
+    <button onclick="setActiveButton(this); lesson3_T6()">  •	نشر الاختبار في Google Form</button>
+    <button id="activityBtn" data-enabled="false" data-message-shown="false"
+  onclick="
+    if (this.dataset.enabled === 'false') {
+      if (this.dataset.messageShown === 'false') {
+        alert('عليك أجتياز عناصر الدرس أولا');
+        this.dataset.messageShown = 'true';
+      }
+    } else {
+      setActiveButton(this);
+      lesson3_T7();
+    }
+  ">النشاط</button>
+
+<button id="selfEvalBtn" data-enabled="false" data-message-shown="false"
+  onclick="
+    if (this.dataset.enabled === 'false') {
+      if (this.dataset.messageShown === 'false') {
+        alert('عليك أجتياز النشاط أولا');
+        this.dataset.messageShown = 'true';
+      }
+    } else {
+      window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit3/Self-evaluation3_3.html';
+    }
+  ">التقويم الذاتي</button>
+  `;
+
+  content.innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     لموديول الثالث-الدرس الثالث:    ضبط إعدادات النموذج فيGoogle Form       
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+      لضبط أعدادات الأختبار في Google Form يتبع التالي    :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/tpxIgEkaJBI" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-----------                                              -------------------------
+function lessonObjectives3_1() {
+  document.getElementById("content").innerHTML = `
+    <div class="lessonObjectives2_2_2" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     لموديول الثالث-الدرس الثالث:    ضبط إعدادات النموذج فيGoogle Form  
+       </div>
+      <div class="lessonObjectives2_2_2-new-container">
+        <div class="lessonObjectives2_2_2-content-row">
+          <div class="lessonObjectives2_2_2-text">
+         
+بعد دراستك لهذا الدرس والتدرب على مفرداته والقيام بأنشطة التعلم المصاحبة، يجب أن تكون قادراً على أن:
+            </div>
+          <div class="lessonObjectives2_2_2-img-side">
+            <img src="Photo/unit3/L3/hadf.png" alt="أهداف الدرس" />
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+
+
+function lesson3_T1() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+     لموديول الثالث-الدرس الثالث:    ضبط إعدادات النموذج فيGoogle Form       
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+     لضبط أعدادات الأختبار في Google Form يتبع التالي    :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/tpxIgEkaJBI" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson3_T2() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+          لموديول الثالث-الدرس الثالث:    ضبط إعدادات النموذج فيGoogle Form      
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+لمشاهدة الردود على الاختبار في Google Formيتبع الآتي   :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/80sOPr9sjoE" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson3_T3() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+          لموديول الثالث-الدرس الثالث:    ضبط إعدادات النموذج فيGoogle Form      
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+لنسخ رابط الاختبار  في Google Form يتبع الآتي  :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/YUcJlqDtpc8" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson3_T4() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+        لموديول الثالث-الدرس الثالث:    ضبط إعدادات النموذج فيGoogle Form       
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+لمعاينة الاختبار  في Google Form يتبع الآتي:
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/Vk-VYfmq5aw" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+//-------
+function lesson3_T5() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section"style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+          لموديول الثالث-الدرس الثالث:    ضبط إعدادات النموذج فيGoogle Form       
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+      لنشرالاختبار  في Google Form يتبع الآتي:
+    </div>
+
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315"
+        src="https://www.youtube.com/embed/XOsOtaRrfXY"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
+
+  `;
+}
+
+//-------
+function lesson3_T6() {
+  // تفعيل الأزرار
+  document.getElementById('activityBtn').dataset.enabled = 'true';
+document.getElementById('selfEvalBtn').dataset.enabled = 'true';
+
+  // المحتوى المعروض
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T1-section" style="position: relative;">
+  <div style="position: absolute; top: 0px; right: 4px; font-size: 8px; margin: 0; padding: 0; z-index: 10;">
+         لموديول الثالث-الدرس الثالث:    ضبط إعدادات النموذج فيGoogle Form       
+  </div>
+  <h3 class="lesson1_T1-title"></h3>
+  <div class="lesson1_T1-row">
+    <div class="lesson1_T1-text">
+حذف الفصل الافتراضي عبر منصة Teams   :
+    </div>
+    
+    <!-- تضمين فيديو اليوتيوب -->
+    <div class="lesson1_T1-video">
+      <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/huKd2hlfBYI" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  `;
+}
+
+
+
+
+function lesson3_T7() {
+  document.getElementById("content").innerHTML = `
+    <div class="lesson1_T7" style="position: relative;">
+  <div style="position: absolute; top: -75px; right: -195px; font-size: 8px; margin: 0; padding: 0;">
+          لموديول الثالث-الدرس الثالث:    ضبط إعدادات النموذج فيGoogle Form       
+  </div>
+
+    <center>
+من خلال فهمك لمهارات دمج التكنولوجيا في التعليم وبالتحديد   مهارات التقويم الالكتروني باستخدام منصة Google form ، قم بحل النشاط التالي
+</center>
+
+ 
+  </ol>
+  <button onclick="window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit3/activities 3_3.html'">بدء</button>
+</div>
+  `;
+}
+
+
+
+
+
+
+//////////////////////////////*****************//////////////////////////////
+ 
+function loadLesson(lesson) {
+  let sidebar = document.getElementById("sidebar");
+  let content = document.getElementById("content");
+
+  if(lesson === 1) {
+  sidebar.innerHTML = `
+    <!-- <button onclick="setActiveButton(this); lessonIntro1()">مقدمة الدرس</button> -->
+    <button onclick="setActiveButton(this); lessonObjectives1()">أهداف الدرس</button>
+    <button onclick="window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit3/Pre-assessmentLesson3_1.html'">التقويم القبلي</button>
+    <button onclick="alert('عليك أجتياز التقويم القبلي أولا')"> عناصر الدرس </button>
+<button onclick="alert('عليك دراسة عناصر الدرس أولاً')">النشاط</button>
+<button onclick="alert('عليك دراسة عناصر الدرس أولاً')">التقويم الذاتي</button>
+
+  `;
+  content.innerHTML = `
+  <div class="intro1">
+    <p>
+الدرس الاول : تسجيل الدخول الى  Google Form الذي يشتمل على معرفة  كيفية تسجيل الدخول في Google Form  ومعرفةوأهم المكونات الموجودة بالواجهة الرئيسية .    </p>
+  </div>
+`;
+
+}
+
+  
+  else if(lesson === 2) {
+    sidebar.innerHTML = `
+      <!-- <button onclick="setActiveButton(this); lessonIntro2_1()">مقدمة الدرس</button> -->
+    <button onclick="setActiveButton(this); lessonObjectives2_1()">أهداف الدرس</button>
+    <button onclick="window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit3/Pre-assessmentLesson3_2.html'">التقويم القبلي</button>
+    <button onclick="alert('عليك أجتياز التقويم القبلي أولا')"> عناصر الدرس </button>
+<button onclick="alert('عليك دراسة عناصر الدرس أولاً')">النشاط</button>
+<button onclick="alert('عليك دراسة عناصر الدرس أولاً')">التقويم الذاتي</button>
+  `;
+  content.innerHTML = `
+  <div class="intro1">
+    <p>
+الدرس الثاني : إضافة اسئلة للنموذج في Google Form الذي يشتمل على معرفة  كيفية إضافة أسئلة للاختبار في Google Form  ومعرفةأهم الاعدادات الخاصة به.</p>
+  </div>
+`;
+  }
+  
+  else if(lesson === 3) {
+    sidebar.innerHTML = `
+      <!-- <button onclick="setActiveButton(this); lessonIntro3_1()">مقدمة الدرس</button> -->
+    <button onclick="setActiveButton(this); lessonObjectives3_1()">أهداف الدرس</button>
+    <button onclick="window.location.href='https://educationalenvironment.github.io/Educational-environment2/unit3/Pre-assessmentLesson3_3.html'">التقويم القبلي</button>
+    <button onclick="alert('عليك أجتياز التقويم القبلي أولا')"> عناصر الدرس </button>
+<button onclick="alert('عليك دراسة عناصر الدرس أولاً')">النشاط</button>
+<button onclick="alert('عليك دراسة عناصر الدرس أولاً')">التقويم الذاتي</button>
+  `;
+  content.innerHTML = `
+  <div class="intro1">
+     <p>
+الدرس الثالث : ضبط إعدادات النموذج فيGoogle Form الذي يشتمل على كيفية ضبط إعدادات الاختبار في Google Form  وتنزيل الردود وعمل نشر للاختبار .   </p>
+      </div>
+`;
+  }
+}
+
+
+///////
+if (window.location.hash === "#lesson1_T1") {
+    loadLessonTabs(1);
+}
+//---------------------------------
+document.getElementById('logout').addEventListener('click', () => {
+      localStorage.removeItem('currentUser');
+      window.location.href = 'index.html';
+    });
+
+/////////
+function setActiveButton(button) {
+    // احذف الكلاس active من كل الأزرار
+    document.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
+    // أضف الكلاس للزر المضغوط
+    button.classList.add("active");
+  }
+//---------تفعيل النشاط
+function enableButtons() {
+  document.getElementById("activityBtn").disabled = false;
+  document.getElementById("selfEvalBtn").disabled = false;
+}
+//----------------
+window.onload = function() {
+  // تحقق من الـ hash الموجود في الرابط
+  if (window.location.hash === '#lesson1_T6') {
+    lesson1_T6(); // يستدعي المحتوى الذي تريده مباشرة
+  }
+}
+//------------------------
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("startLesson2") === "true") {
+    loadLessonTabs2(); // تنفيذ وظيفة زر "بدء عناصر الدرس الثاني"
+    localStorage.removeItem("startLesson2"); // إزالة العلامة بعد الاستخدام
+  }
+});
+
+//----------------
+window.addEventListener("DOMContentLoaded", function () {
+    if (window.location.hash === "#lesson3") {
+      loadLessonTabs3();
+    }
+  });
+//----------------------
+window.addEventListener("DOMContentLoaded", () => {
+  const lessonToStart = localStorage.getItem("startLesson");
+
+  if (lessonToStart === "lesson2") {
+    localStorage.removeItem("startLesson"); // نحذفه قبل التشغيل حتى لا يعيد التشغيل مرة أخرى
+    loadLesson(2);
+  }
+
+  if (lessonToStart === "lesson3") {
+    localStorage.removeItem("startLesson");
+    loadLesson(3);
+  }
+});
+
+
+
+//------------------------
+</script>
+</body>
+</html>

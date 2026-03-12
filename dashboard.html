@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>بيئة تدريبية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+  <style>
+   
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f4f4f8;
+      display: flex;
+      flex-direction: column;
+      min-height: 80vh;
+    }
+    header {
+      background: #4a00e0;
+      color: #fff;
+      padding: 15px;
+    }
+    .logos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .logos img {
+      height: 40px;
+      width: auto;
+    }
+
+    .titltion {
+    padding: 1px;
+    text-align: center;
+    background: #eee;
+  }
+
+  .titltion h2 {
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 25px; /* يمكنك تعديله حسب الحاجة */
+  }
+
+  .titltion .desc {
+    margin-top: 8px;
+    font-size: 25px;
+    color: #555;
+  }
+  .my-custom-size {
+  font-size: 15px; /* أو أي حجم تريده */
+}
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background: #fff;
+      padding: 10px;
+      gap: 20px;
+      border-bottom: 2px solid #ddd;
+    }
+    .tabs button {
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 12px;
+      transition: all 0.3s;
+    }
+    .tabs button:hover {
+      color: #fff;
+      background: #4a00e0;
+      border-radius: 6px;
+    }
+    .tabs button.active {
+      border-bottom: 3px solid #4a00e0;
+      color: #4a00e0;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+    .content {
+      flex: 3;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      min-height: 300px;
+    }
+    .sidebar {
+      flex: 1;
+      background: #dfe9ff;
+      padding: 20px;
+      border-radius: 10px;
+      order: -1;
+    }
+    .sidebar h3 {
+      margin-bottom: 15px;
+    }
+    .sidebar .announcement button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      background-color: #4a00e0;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .sidebar .announcement button:hover {
+      background-color: #3700b3;
+    }
+/* 444 44 */
+
+.additional-info {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.additional-info h3 {
+    color: #444;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.additional-info img.center-image {
+    width: 120px;
+    margin: 30px auto 30px;
+    display: block;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.supervision-images {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* بدل flex-start */
+    gap: 40px;
+    margin-top: 0;
+    flex-wrap: wrap;
+}
+
+.supervision-images .supervisor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.supervision-images img {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+.supervision-images img:hover {
+    transform: scale(1.1);
+}
+
+.supervision-images p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+/**/
+    #logout {
+  background-color: #314dac; /* بنفسجي فاتح */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s ease;
+}
+
+#logout:hover {
+  background-color: #4a0072; /* أغمق عند المرور */
+}
+.infographic-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.infographic-container img {
+  max-width: 50%;
+  height: auto;
+  border: 3px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/*معلومات الاشراف */
+
+.thesis-profile {
+  max-width: 800px;
+  margin: 10px auto;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #444;
+}
+
+.thesis-profile-researcher img,
+.thesis-profile-supervisor img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  margin: 6px 0;
+}
+
+.thesis-profile-researcher .name,
+.thesis-profile-supervisor .name {
+  font-weight: bold;
+  margin: 3px 0;
+  font-size: 12px;
+}
+
+.thesis-profile-supervisors {
+  margin-top: 15px;
+}
+
+.thesis-profile-supervisors-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.thesis-profile-supervisor {
+  flex: 1;
+  min-width: 140px;
+}
+
+.thesis-profile-center {
+  transform: translateY(8px);
+}
+
+.thesis-profile-supervisor p {
+  font-size: 11px;
+  color: #555;
+  line-height: 1.25;
+}
+
+
+/*---------------------------------*/
+/*اهداف الوحده*/
+.objectives-heading {
+  font-size: 22px;
+  font-weight: bold;
+  color: #4a00e0;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fadeInUp 1s ease forwards;
+  background: linear-gradient(to right, #ece9f0, #f4f4f8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+  margin-left: 150px; /* تباعد من اليسار */
+  margin-right: 50px;
+}
+
+
+
+
+/* دليل المتدرب */
+.lessons-module-container {
+  text-align: center;
+  margin: 15px;
+}
+
+.module-title {
+  font-size: 15px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.module-title img.title-icon {
+  width: 28px;
+}
+
+.lessons-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.lesson-item {
+  width: 180px;
+  padding: 15px;
+  border-radius: 12px;
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  transition: transform 0.3s;
+}
+
+.lesson-item:hover {
+  transform: translateY(-5px);
+}
+
+.lesson-top-icon {
+  background: #fff;
+  border-radius: 50%;
+  padding: 8px;
+  width: 50px;
+  height: 50px;
+  margin: -40px auto 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lesson-top-icon img {
+  width: 30px;
+}
+
+.lesson-text h4 {
+  margin: 10px 0 5px;
+  font-size: 16px;
+}
+
+.lesson-text p {
+  font-size: 13px;
+}
+
+.lesson-line {
+  height: 30px;
+  width: 2px;
+  background: #fff;
+  margin: 8px auto;
+}
+
+.lesson-number {
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  color: #333;
+  border-radius: 50%;
+  line-height: 24px;
+  font-size: 13px;
+  margin: 0 auto;
+}
+
+/* ألوان كل درس */
+.lesson-purple {
+  background: linear-gradient(135deg, #7e3ff2, #9346e3);
+}
+
+.lesson-blue {
+  background: linear-gradient(135deg, #2a6ef3, #4c8af5);
+}
+
+.lesson-cyan {
+  background: linear-gradient(135deg, #00b6ad, #2fc9c0);
+}
+/*----------------------------------------*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-btn {
+    background-color: #5e07ff;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .dropdown-content a:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover .dropdown-btn {
+    background-color: #240cfc;
+  }
+
+  .tab-content {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+/* التقويم */
+.calendar-container {
+  display: flex;
+  direction: rtl; /* عشان الأزرار تكون على اليمين */
+  gap: 20px;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.calendar-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 180px; /* تثبيت عرض الأزرار */
+}
+
+.card-item {
+  background-color: #2196f3;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.card-item:hover {
+  background-color: #1769aa;
+}
+
+.calendar-content-area {
+  flex: 1;
+  text-align: right;
+}
+
+.calendar-content-box {
+  background-color: #f9f9fc;
+  padding: 20px;
+  border-radius: 10px;
+  color: #333;
+  line-height: 1.8;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.small-text-instructions ul {
+  padding-right: 18px;
+  list-style-type: square;
+}
+
+.small-text-instructions li {
+  margin-bottom: 5px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* زر بدء الاختبار ثابت أسفل الشاشة */
+.start-button-fixed {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.start-button-fixed button {
+  padding: 10px 30px;
+  background-color: #3800b0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.start-button-fixed button:hover {
+  background-color: #2c008c;
+}
+
+
+/* اتصل بنا */
+
+
+
+.contact-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* لمنتصف الارتفاع */
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.contact-info {
+  flex: 1;
+  text-align: right;
+}
+
+.contact-info h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.contact-card {
+  background: #f9f9fc;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.contact-image {
+  flex: 1;
+}
+
+.contact-image img {
+  width: 100%;   /* يجعلها تملأ كامل النصف الأيسر */
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+
+
+
+/*-------------------------------------------------*/
+
+ .thesis-info {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.thesis-info .researcher img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin: 3px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.thesis-info .researcher h4 {
+  margin-bottom: 2px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.1;
+}
+
+.thesis-info .researcher p {
+  font-size: 11px;
+  line-height: 1.1;
+  margin: 1px 0;
+}
+
+.thesis-info .supervisors {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.thesis-info .supervisors h4 {
+  width: 100%;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.1;
+}
+
+.thesis-info .supervisor {
+  max-width: 180px;
+  text-align: center;
+}
+
+.thesis-info .supervisor img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.thesis-info .supervisor p {
+  font-size: 10px;
+  color: #555;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+/*--------------*/
+.objectives-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* النص في اليمين والصورة في اليسار */
+  gap: 20px; /* مسافة بين النص والصورة */
+  direction: rtl; /* لجعل النص يبدأ من اليمين */
+}
+
+.objectives-heading {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.infographic-container img {
+  max-width: 550px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+ /*--------------*/
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logos">
+      <img src="Photo/q2.jpg" alt="Logo 1">
+    <h5 class="my-custom-size"> بيئة تدريبية قائمة على محفزات الألعاب الرقمية لتنمية بعض مهارات دمج التكنولوجيا في التعليم لدى أعضاء الهيئة المعاونة بكلية التربية النوعية</h5>
+      <img src="Photo/q3.jpg" alt="Logo 3">
+      
+    </div>
+
+  </header>
+    <div class="desc">
+     
+    </div>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="home">الصفحة الرئيسية</button>
+    <button class="tab-btn" data-tab="objectives">أهداف البيئة</button>
+    <button class="tab-btn" data-tab="guide">دليل المتدرب</button>
+    <div class="dropdown">
+  <button class="dropdown-btn">التقويم</button>
+  <div class="dropdown-content">
+    <button class="tab-btn" data-tab="calendar">📌 التقويم القبلي</button>
+    <button class="tab-btn" data-tab="calend">📌 التقويم البعدي</button>
+  </div>
+</div>
+
+    <button class="tab-btn" data-tab="content">المحتوى التعليمي</button>
+    <button class="tab-btn" data-tab="contact">اتصل بنا</button>
+    <button id="logout"> تسجيل الخروج</button>
+  </nav>
+
+  <div class="main">
+
+    <div class="content" id="content-area">
+      <center><h4>
+  بيئة تدريب لتطبيق الجانب العملي لرسالة الماجستير بعنوان:  <br>
+      <strong> {  اختلاف نمط التحدي في بيئة تدريب قائمة على محفزات الألعاب الرقمية وأثره على تنمية بعض مهارات دمج التكنولوجيا في التعليم لدى أعضاء الهيئة المعاونة بالكلية }</strong>
+</h4></center> <br>
+      <div class="thesis-profile">
+  <div class="thesis-profile-researcher">
+    <h4>الإعداد:</h4>
+    <img src="Photo/dkhlod.jfif" alt="صورة الباحثة">
+    <h4 class="name">خلود جمال أبوبكر</h4>
+    <p>معيدة بقسم تكنولوجيا التعليم والحاسب الآلي</p>
+  </div>
+
+  <div class="thesis-profile-supervisors">
+    <h4>الإشراف:</h4>
+    <div class="thesis-profile-supervisors-wrapper">
+      <div class="thesis-profile-supervisor">
+        <img src="Photo/aml.jpg" alt="مشرف 1">
+        <h4 class="name">الأستاذ الدكتور/ أمل السيد أحمد الطاهر</h4>
+        <p>استاذ تكنولوجيا التعليم المساعد<br>كلية التربية النوعية جامعة الزقازيق</p>
+      </div>
+      <div class="thesis-profile-supervisor thesis-profile-center">
+        <img src="Photo/dnglaa.jfif" alt="مشرف 2">
+        <h4 class="name">الأستاذ الدكتور/ نجلاء سعيد محمد</h4>
+        <p>استاذ تكنولوجيا التعليم المساعد<br>كلية التربية النوعية جامعة الزقازيق</p>
+      </div>
+      <div class="thesis-profile-supervisor">
+        <img src="Photo/lmiaa.jfif" alt="مشرف 3">
+        <h4 class="name">دكتور/ لمياء محمد الهادي</h4>
+        <p>مدرس تكنولوجيا التعليم<br>كلية التربية النوعية جامعة الزقازيق</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabase = window.supabase.createClient(
+    'https://duxdtpkxomkjoxnlzjgw.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1eGR0cGt4b21ram94bmx6amd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5MTYyMzIsImV4cCI6MjA2NzQ5MjIzMn0._MOyOhSQvvKrmEwAJGvibp79JXM9MlTJyEVnpvuTJL0'
+  );
+
+  async function fetchGuideLink() {
+    const { data, error } = await supabase
+      .from('files')
+      .select('url')
+      .eq('name', 'دليل المتدرب.pdf')
+      .single();
+
+    if (!error && data) {
+      document.getElementById('guide-link').onclick = () => window.open(data.url, '_blank');
+    }
+  }
+
+  function loadTabContent(tabName) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+    if (tabName === 'objectives') {
+  document.getElementById('content-area').innerHTML = `
+    <div class="objectives-section">
+      <div class="objectives-heading"> عزيزي المتدرب تتمثل أهداف البيئة في :-</div>
+      <div class="infographic-container">
+        <img src="Photo/unit1/hdf.jfif" alt="إنفوجرافيك أهداف البيئة">
+      </div>
+    </div>
+  `;
+}
+//------------------------------------------------------------------// 
+
+
+else if (tabName === 'guide') {
+  document.getElementById('content-area').innerHTML = `
+    <div class="lessons-module-container">
+      <h3 class="module-title">
+        <img src="Photo/midel1/Lessons1.png" class="title-icon">
+        عزيزي المتدرب: يسعدني أن أقدم هذا الدليل الذي سيرشدكم أثناء السير داخل البيئة التدريبية من خلال ثلاث محاور رئيسية
+      </h3>
+      <div class="lessons-wrapper">
+        <div class="lesson-item lesson-purple nav-btn" data-tab="mma">
+          <div class="lesson-top-icon"><img src="Photo/midel1/Lessons1.png"></div>
+          <div class="lesson-text">
+            <h4> 1</h4>
+            <p> المتطلبات الاساسية لأستخدام البيئة </p>
+          </div>
+          <div class="lesson-line"></div>
+          <div class="lesson-number">1</div>
+        </div>
+
+        <div class="lesson-item lesson-blue nav-btn" data-tab="mmb">
+          <div class="lesson-top-icon"><img src="Photo/midel1/Lessons1.png"></div>
+          <div class="lesson-text">
+            <h4> 2</h4>
+            <p> كيفية تسجيل الدخول<br> ف البيئه </p>
+          </div>
+          <div class="lesson-line"></div>
+          <div class="lesson-number">2</div>
+        </div>
+
+        <div class="lesson-item lesson-cyan nav-btn" data-tab="mmc">
+          <div class="lesson-top-icon"><img src="Photo/midel1/Lessons1.png"></div>
+          <div class="lesson-text">
+            <h4> 3</h4>
+            <p> الأبحار والتفاعل <br>داخل البيئه </p>
+          </div>
+          <div class="lesson-line"></div>
+          <div class="lesson-number">3</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // 🟢 تعريف دالة محلية خاصة بالتنقل فقط داخل هذا القسم
+ function goToSection(tabName) {
+  if (tabName === 'mma') {
+    document.getElementById('content-area').innerHTML = `
+      <section class="lesson-detail" style="
+  max-width: 800px;         /* عرض أكبر */
+  width: 90%;               /* عرض نسبي ليكون متجاوب */
+  padding: 30px 35px;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  text-align: right;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  position: relative;       /* بدل absolute عشان نتحكم بالمسافة العليا */
+  margin: 20px auto 0 auto; /* مسافة علوية 100px، وتمركز أفقي */
+  line-height: 1.7;
+  direction: rtl;
+  animation: fadeIn 0.7s ease forwards;
+">
+  <h2 style="font-size: 30px; margin-bottom: 20px; font-weight: 700;">
+  </h2>
+  <p style="font-size: 18px; margin-bottom: 30px;">
+    عزيزي المتدرب........<br><br>
+    يتطلب استخدام البيئة التدريبية أن يتوفر لديك ما يأتي:<br>
+    ١. جهاز كمبيوتر أو لاب توب.<br>
+    ٢. إعدادات العرض (الشاشة) ٧٦٨ * ١٣٦٦<br>
+    ٣. برنامج تصفح الإنترنت مثل (Google Chrome - Firefox)<br>
+    ٤. يفضل استخدام سرعة إنترنت فائقة.
+  </p>
+  <button id="back-btn" style="
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+  "
+  onmouseover="this.style.backgroundColor='#2980b9'"
+  onmouseout="this.style.backgroundColor='#3498db'">
+    ◀ العودة إلى الدليل
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+    `;
+    document.getElementById("back-btn").addEventListener("click", () => {
+      loadTabContent('guide');
+    });
+
+  } else if (tabName === 'mmb') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+      max-width: 900px;
+      width: 90%;
+      padding: 25px 30px;
+      margin: 0px auto 0 auto;
+      background: #f5f7fa;
+      border-radius: 16px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      direction: rtl;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2c3e50;
+      animation: fadeIn 0.7s ease forwards;
+    ">
+      <div class="text-content" style="flex: 1; text-align: right; font-size: 18px; line-height: 1.7;">
+        <p>
+          عزيزي المتدرب........<br><br>
+          لتسجيل الدخول للبيئة التدريبية أتبع الخطوات الأتية:<br>
+          ١. فتح متصفح الإنترنت مثل متصفح Google Chrome.<br>
+          2. نسخ لينك البيئة التدريبية 
+          <a href="http://107.189.1.159/~newshaker/zag/index.php" target="_blank" style="color:#3498db; text-decoration: underline;">
+            http://107.189.1.159/~newshaker/zag/index.php
+          </a> 
+          فى مستطيل البحث بالمتصفح ثم الضغط على زر Enter من لوحة المفاتيح.<br>
+          ٣. تظهر صفحة تسجيل الدخول، اكتب اسمك، والباسورد الخاص بك، ثم اضغط دخول. كما بشكل (2).
+        </p>
+        <button id="back-btn" style="
+          background-color: #3498db;
+          border: none;
+          color: white;
+          padding: 14px 28px;
+          font-size: 17px;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          margin-top: 25px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        "
+        onmouseover="this.style.backgroundColor='#2980b9'"
+        onmouseout="this.style.backgroundColor='#3498db'">
+          ◀ العودة إلى الدليل
+        </button>
+      </div>
+      <div class="image-content" style="flex: 1; text-align: center;">
+        <img src="Photo/Dlel1.jpg" alt="صورة توضيحية لتسجيل الدخول" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+      </div>
+
+      <style>
+        @keyframes fadeIn {
+          from {opacity: 0;}
+          to {opacity: 1;}
+        }
+      </style>
+    </section>
+  `;
+  
+  document.getElementById("back-btn").addEventListener("click", () => {
+    loadTabContent('guide');
+  });
+
+
+  } else if (tabName === 'mmc') {
+  document.getElementById('content-area').innerHTML = `
+   <section class="lesson-detail" style="
+  max-width: 900px;
+  width: 90%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* ✅ لتجعل العناصر رأسية */
+  justify-content: center; /* ✅ توسيط عمودي */
+  align-items: center; /* ✅ توسيط أفقي */
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  animation: fadeIn 0.7s ease forwards;
+">
+  <div style="display: flex; width: 100%; flex: 1; gap: 30px; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right; font-size: 18px; line-height: 1.7;">
+      <p>
+        عزيزي المتدرب........<br><br>
+        للإبحار والتفاعل الجيد داخل بيئة التدريب كما في الشكل أتبع الخطوات الآتية:
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel2.jpg" alt="صورة توضيحية للتفاعل" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc2');
+  });
+}
+
+else if (tabName === 'mmc2') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 1000px;
+  width: 100%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* ✅ لتوزيع العناصر رأسياً */
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  animation: fadeIn 0.7s ease forwards;
+">
+  <div style="display: flex; width: 100%; gap: 30px; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right; font-size: 18px; line-height: 1.7;">
+      <p>
+        ▪ اضغط على زر أهداف البيئة لمعرفة الموضوعات التى تقدمها البيئة التدريبية.
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel3.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 40px;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc3');
+  });
+}
+
+
+else if (tabName === 'mmc3') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 1000px;
+  width: 100%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* ✅ لتحويل الهيكل إلى عمودي */
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  animation: fadeIn 0.7s ease forwards;
+">
+  <div style="display: flex; width: 100%; gap: 30px; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right; font-size: 18px; line-height: 1.7;">
+      <p>
+        اضغط على زر دليل المتدرب لمعرفة كيفية التسجيل في البيئة والمتطلبات الأساسية اللازمة.
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel4.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 25px;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc4');
+  });
+}
+
+else if (tabName === 'mmc4') {
+  document.getElementById('content-area').innerHTML = `
+   <section class="lesson-detail" style="
+  max-width: 1000px;
+  width: 100%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* ✅ جعل السيكشن عموديًا */
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  animation: fadeIn 0.7s ease forwards;
+">
+  <div style="display: flex; width: 100%; gap: 30px; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right; font-size: 18px; line-height: 1.7;">
+      <p>
+        ▪ اضغط على زر التقويم (التقويم القبلي) كما في شكل (4) وقم بأداء الاختبار القبلي، وبناءً على درجتك سيوجهك الاختبار إلى دراسة الموديولات التدريبية.
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel5.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 25px;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc5');
+  });
+}
+
+else if (tabName === 'mmc5') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 1000px;
+  width: 100%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  animation: fadeIn 0.7s ease forwards;
+">
+  <div style="display: flex; width: 100%; gap: 30px; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right; font-size: 18px; line-height: 1.7;">
+      <p>
+        ▪ اضغط زر المحتوى التعليمي لدراسة الموديول الأول المقسم لعدة دروس.
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel7.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 25px;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc6');
+  });
+}
+
+else if (tabName === 'mmc6') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 1000px;
+  width: 100%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  animation: fadeIn 0.7s ease forwards;
+">
+  <div style="display: flex; width: 100%; gap: 30px; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right; font-size: 18px; line-height: 1.7;">
+      <p>
+        ▪ للتواصل مع الباحثة اضغط على زر "اتصل بنا" والذي يشمل Gmail، والواتس من خلال رقم التليفون.
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel8.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 25px;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc7');
+  });
+}
+else if (tabName === 'mmc7') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+      max-width: 900px;
+      width: 90%;
+      min-height: 400px;
+      padding: 20px 40px;
+      margin: 20px auto 0 auto;
+      background: #f5f7fa;
+      border-radius: 16px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      direction: rtl;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2c3e50;
+      font-size: 16px;
+      line-height: 1.4;
+      animation: fadeIn 0.7s ease forwards;
+    ">
+      <div style="
+        flex: 1;
+        padding-right: 10px;
+        margin-bottom: 15px;
+      ">
+        <p style="margin-bottom: 12px;">
+          الهدف العام من البيئة التدريبية:<br>
+          تنمية بعض مهارات دمج التكنولوجيا في التعليم لدى أعضاء الهيئة المعاونة بكلية التربية النوعية.
+        </p>
+        <p style="margin-bottom: 12px;">
+          كما يجب عزيزي المتدرب أن يتوافر لديك مهارات تساعدك على تصفح البيئة واستخدامها وهي:
+        </p>
+        <ul style="margin-bottom: 12px; padding-right: 20px;">
+          <li>استخدام جهاز الحاسب الآلي.</li>
+          <li>البحث باستخدام الإنترنت على مواقع متعددة.</li>
+          <li>استخدام برامج الكتابة والتصميم.</li>
+        </ul>
+        <p style="margin-bottom: 12px;">
+          عليك عزيزي المتدرب أداء التقويم القبلي: قبل دراسة محتوى البيئة التدريبية لمعرفة مدى خبراتك واحتياجك للمحتوى المتاح، من خلال قراءة تعليمات كل اختبار أو مقياس ومكوناته، مع ترك مدة أربع أيام لأداء التقويم القبلي بما يتناسب مع وقتك؛ تجنباً لقلقك واستعدادك لأدائهم بهدوء.
+        </p>
+        <p>
+          بعد الانتهاء من أداء الاختبار، إذا كانت نسبة نجاحك أقل من 50% يسمح لك بدخول البيئة ودراسة المحتوى، وإذا كانت نسبة نجاحك أعلى من 50% فأنت لست بحاجة إلى دراسة البيئة ولا يسمح لك بدخول البيئة ودراسة المحتوى.
+        </p>
+      </div>
+
+      <button id="next-btn" style="
+        background-color: #27ae60;
+        border: none;
+        color: white;
+        padding: 14px 28px;
+        font-size: 17px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 0 auto 10px auto;
+        display: block;
+      "
+      onmouseover="this.style.backgroundColor='#219150'"
+      onmouseout="this.style.backgroundColor='#27ae60'">
+        تابع ▶
+      </button>
+
+      <style>
+        @keyframes fadeIn {
+          from {opacity: 0;}
+          to {opacity: 1;}
+        }
+      </style>
+    </section>
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc8');
+  });
+}
+
+else if (tabName === 'mmc8') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 1000px;
+  width: 90%;
+  padding: 20px 0px 0px 20px;  /* تقليل الحشو العلوي والسفلي */
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  font-size: 12px;
+  line-height: 1.3;
+  animation: fadeIn 0.7s ease forwards;
+  overflow: hidden;
+">
+
+  <div style="display: flex; gap: 10px; flex: 1; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right; overflow: hidden;">
+      <p style="margin-bottom: 0;">
+        ▪ ثم اضغط زر المحتوى التعليمي: حيث يتكون من أربعة موديولات، يتم دراسة درس واحد كل يوم من الموديولات التدريبية.<br><br>
+        &#10003; الموديول الأول: خلفية نظرية عن دمج التكنولوجيا في التعليم، يشمل 3 دروس مرتبة كالآتي:<br>
+        1. مفهوم دمج التكنولوجيا في التعليم.<br>
+        2. مهارات دمج التكنولوجيا في التعليم.<br>
+        3. تنمية مهارات التصميم التعليمي.<br>
+        &#10003; الموديول الثاني: مهارات الاتصال الإلكتروني باستخدام منصة Teams ، يشمل 3 دروس مرتبة كالآتي:<br>
+        1. تسجيل الدخول في منصة Teams.<br>
+        2. ضبط اعدادات اجتماع الفصل الافتراضي عبر منصة Teams.<br>
+        3. إدارة الفصل الافتراضي عبر منصة Teams.<br>
+        &#10003; الموديول الثالث: مهارات التقويم الإلكتروني باستخدام Google Form ، ويشمل 3 دروس مرتبة كالآتي:<br>
+        1. تسجيل الدخول الى Google Form.<br>
+        2. إضافة اسئلة للنموذج في Google Form.<br>
+        3. ضبط إعدادات النموذج في Google Form.<br>
+        &#10003; الموديول الرابع: مهارات الثقافة الرقمية باستخدام برنامج Mendeley ، ويشمل 3 دروس مرتبة كالآتي:<br>
+        1. تسجيل الدخول إلى Mendeley.<br>
+        2. إضافة مجلد من جهاز الكمبيوتر كمرجع في Mendeley.<br>
+        3. تنمية البحث في الوثائق في Mendeley.<br>
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel10.jpg" alt="صورة توضيحية" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <!-- الزر مع تقليل المسافة السفلية -->
+  <button id="next-btn" style="
+    margin: 10px auto 0px auto;  /* تصغير الهامش من الأسفل */
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    font-size: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc10');
+  });
+}
+
+else if (tabName === 'mmc10') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 900px;
+  width: 90%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* جعل الاتجاه عمودي ليكون الزر في صف مستقل */
+  gap: 30px;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: fadeIn 0.7s ease forwards;
+">
+
+  <div style="display: flex; gap: 30px; flex: 1; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right;">
+      <p>
+        ▪ ثم قراءة الأهداف المراد تحقيقها من الموديول ككل، كما بشكل (8) الآتي:
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel11.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; /* لجعل الزر في منتصف العرض */
+    display: block;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc11');
+  });
+}
+else if (tabName === 'mmc11') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 900px;
+  width: 90%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* هنا جعلت التوزيع عمودياً */
+  gap: 30px;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: fadeIn 0.7s ease forwards;
+">
+
+  <div style="display: flex; gap: 30px; flex: 1; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right;">
+      <p>
+        ▪ ثم لمعرفة دروس الموديول وعناوينها يتم الوقوف على الدروس فتظهر قائمة منسدلة للدروس كما بشكل (9).
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel12.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; /* تمركز الزر أفقياً */
+    display: block;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc12');
+  });
+}
+else if (tabName === 'mmc12') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 900px;
+  width: 90%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* جعل المحتوى عمودياً */
+  gap: 30px;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: fadeIn 0.7s ease forwards;
+">
+
+  <div style="display: flex; gap: 30px; flex: 1; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right;">
+      <p>
+        ▪ عند اختيار الدرس الأول تظهر قوائم خاصة بالدرس كما في شكل (10).
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel13.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; /* تمركز الزر أفقياً */
+    display: block;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc13');
+  });
+}
+else if (tabName === 'mmc13') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 900px;
+  width: 90%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* جعل العناصر عمودية */
+  gap: 30px;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: fadeIn 0.7s ease forwards;
+">
+
+  <div style="display: flex; gap: 30px; flex: 1; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right;">
+      <p>
+        ب. الابحار في النشاط التعليمي:<br>
+        يتم تقديم النشاط بنمطي التحدي:<br>
+        ▪ ضغط الوقت.<br>
+        ▪ الأسئلة الخاصة.
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel14.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; /* تمركز الزر أفقياً */
+    display: block;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc14');
+  });
+}
+else if (tabName === 'mmc14') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 900px;
+  width: 90%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* لجعل المحتوى عمودي */
+  gap: 30px;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: fadeIn 0.7s ease forwards;
+">
+
+  <div style="display: flex; gap: 30px; flex: 1; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right;">
+      <p>
+        مثال: للنشاط بالبيئة التدريبية كما بالشكل(14) الآتي:
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel15.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; /* تمركز الزر أفقياً */
+    display: block;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc15');
+  });
+}
+
+else if (tabName === 'mmc15') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 900px;
+  width: 90%;
+  height: 400px;
+  padding: 20px 25px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column; /* ليصبح عمودي */
+  gap: 25px;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  font-size: 11px;
+  line-height: 1.4;
+  animation: fadeIn 0.7s ease forwards;
+">
+
+  <div style="display: flex; gap: 25px; flex: 1; align-items: center;">
+    <div class="text-content" style="flex: 1; text-align: right;">
+      <p>
+        ج. الابحار فى التقويم و الاختبار:<br><br>
+        ▪ عزيزي المتدرب بعد الانتهاء من دراسة جميع عناصر الدرس وبعد أن يتم تسليم النشاط يتاح لك أداء التقويم الذاتي، حيث تنوع اسئلته ما بين الصواب أو الخطأ، الاختيار من متعدد كما في شكل (15).<br><br>
+        ▪ إذا حصلت على أعلى من أو يساوي 50% واجتزت التقويم يتاح لك الانتقال إلى الدرس التالي كما في الشكل (16).<br><br>
+        ▪ بينما إذا حصلت على أقل من 50% هيتم إرجاعك للدرس السابق ودراسته مرة أخرى لاجتيازه.<br><br>
+        ▪ بعد الانتهاء من الدروس الخاصة بالموديول سوف تظهر صفحة التقويم لأداء الاختبار البعدي، فإذا حصلت على نسبة أقل من 50% يتم دراسة الموديولات مرة أخرى، وإذا حصلت على 50% أو أكثر تكون اجتزت المحتوى المقدم بنجاح.
+      </p>
+    </div>
+
+    <div class="image-content" style="flex: 1; text-align: center;">
+      <img src="Photo/Dlel16.jpg" alt="صورة توضيحية" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+    </div>
+  </div>
+
+  <button id="next-btn" style="
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0 auto; /* تمركز الزر أفقياً */
+    display: block;
+    transition: background-color 0.3s ease;
+  "
+  onmouseover="this.style.backgroundColor='#219150'"
+  onmouseout="this.style.backgroundColor='#27ae60'">
+    تابع ▶
+  </button>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</section>
+
+  `;
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    goToSection('mmc16');
+  });
+}
+
+else if (tabName === 'mmc16') {
+  document.getElementById('content-area').innerHTML = `
+    <section class="lesson-detail" style="
+  max-width: 900px;
+  width: 90%;
+  height: 400px;
+  padding: 25px 30px;
+  margin: 20px auto 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  font-size: 11px;
+  line-height: 1.6;
+  animation: fadeIn 0.7s ease forwards;
+">
+  <div style="text-align: right;">
+    <p><strong>المصادر والمراجع التعليمية المطلوبة لدراسة محتوى البيئة التدريبية:</strong></p>
+    <p>▪ <strong>الكتاب الجامعي:</strong></p>
+    <p style="margin-right: 15px;">
+      ✓ محمود محمد حسين (۲۰۱۸) أثر التفاعل بين أسلوب محفزات الألعاب (النقاط / ولوحة الشرف) ونمط الشخصية (انبساطي / انطوائي) على تنمية بعض مهارات معالجة الرسومات التعليمية الرقمية والانخراط في التعلم لدى طلاب كلية التربية النوعية، تكنولوجيا التربية، دراسات وبحوث، ۳۷۴، ص ٥٩<br><br>
+      ✓ الغزو، إيمان محمد (2015). دمج التقنيات في التعليم إعداد المعلم تقنياً للألفية الثالثة ط(1). نبي دار القلم
+    </p>
+    <p>▪ <strong>كتب ومقالات متوفرة بمكتبة الكلية وعلى شبكة الإنترنت:</strong></p>
+    <p style="margin-right: 15px;">
+      ✓ رحاب السيد، غادة عبدالعاطي (2020). كتاب دمج التكنولوجيا في التعليم - كلية التربية النوعية بجامعة الزقازيق
+    </p>
+
+    <button id="back-btn" style="
+      background-color: #3498db;
+      border: none;
+      color: white;
+      padding: 12px 26px;
+      font-size: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 30px auto 0 auto;  /* تمركز أفقياً مع مسافة فوق */
+      display: block;
+      transition: background-color 0.3s ease;
+    "
+    onmouseover="this.style.backgroundColor='#2c80b4'"
+    onmouseout="this.style.backgroundColor='#3498db'">
+      ◀ العودة إلى الدليل
+    </button>
+  </div>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</section>
+
+  `;
+
+    document.getElementById("back-btn").addEventListener("click", () => {
+      loadTabContent('guide');
+  });
+}
+
+  }
+
+  // 🟢 تعريف زر العودة أيضًا
+  window.goBackToGuide = function () {
+    // ببساطة نعيد عرض المحتوى مجددًا
+    // (أو تنادي navigateTo('guide') أو loadTab('guide') حسب الحالة)
+    loadTab('guide');
+  };
+
+  // 🟢 تفعيل الأحداث على الأزرار الثلاثة
+  const buttons = document.querySelectorAll('.nav-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-tab');
+      goToSection(target);
+    });
+  });
+}
+
+
+
+
+
+//----------------------------------------------------------------//
+   //الأختبار القبلي 
+   
+else if (tabName === 'calendar') {
+  document.getElementById('content-area').innerHTML = `
+    <div class="calendar-container">
+  <!-- النصف الأيمن للأزرار -->
+  <div class="calendar-buttons">
+    <div class="card-item" onclick="toggleContent('goal-content')">الهدف من الاختبار</div>
+    <div class="card-item" onclick="toggleContent('structure-content')">بناء الاختبار</div>
+    <div class="card-item" onclick="toggleContent('instructions-content')">التعليمات</div>
+  </div>
+
+  <!-- النصف الأيسر للنص -->
+  <div class="calendar-content-area">
+    <center>
+  <h2 style="color: #2c3e50; font-size: 20px;"> الأختبار القبلي</h2>
+</center>
+
+
+    <div id="goal-content" class="calendar-content-box" style="display: none;">
+      <p><strong>الهدف من الاختبار:</strong></p>
+      <p>يهدف الاختبار الحالي إلى قياس الجوانب المعرفية المتعلقة بمهارات دمج التكنولوجيا في التعليم لدى أفراد عينة البحث.</p>
+    </div>
+
+    <div id="structure-content" class="calendar-content-box" style="display: none;">
+      <p><strong>بناء الاختبار:</strong></p>
+      <p>يتكون من (80) مفردة:</p>
+      <ul>
+        <li>(51) اختيار من متعدد، لكل منها رأس وأربعة بدائل بينها بديل صحيح.</li>
+        <li>(29) صواب وخطأ، مع وضع (√) إذا صحيحة أو (×) إذا خاطئة.</li>
+      </ul>
+    </div>
+
+    <div id="instructions-content" class="calendar-content-box small-text-instructions" style="display: none;">
+      <p><strong>عزيزي المتدرب :</strong></p>
+      <ul>
+        <li> اقرأ كل مفردة من مفردات التقويم بدقة وعناية فائقة قبل بدء الإجابة.</li>
+        <li> لا تترك آية مفردة دون إجابة، بل اجتهد في التفكير في الحل.</li>
+        <li> لا تتسرع في الإجابة، فالزمن القليل ليس معيارا لتفوقك، وإنما المعيار هي الدرجة التي تحصل عليها.</li>
+        <li> المفردات من نوع الاختيار من متعدد، والصواب والخطأ.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- زر بدء الاختبار في الأسفل -->
+<div class="start-button-fixed">
+  <button onclick="loadTabContent('calendar1')">بدأ الأختبار</button>
+</div>
+
+
+  `;
+
+//أسئله الأختبار القبلي
+    } else if (tabName === 'calendar1') {
+    // الانتقال إلى صفحة الأسئلة
+    window.location.href = 'questions.html';
+} else if (tabName === 'calend') {
+      document.getElementById('content-area').innerHTML = `
+         <div class="calendar-container">
+  <!-- النصف الأيمن للأزرار -->
+  <div class="calendar-buttons">
+    <div class="card-item" onclick="toggleContent('goal-content')">الهدف من الاختبار</div>
+    <div class="card-item" onclick="toggleContent('structure-content')">بناء الاختبار</div>
+    <div class="card-item" onclick="toggleContent('instructions-content')">التعليمات</div>
+  </div>
+
+  <!-- النصف الأيسر للنص -->
+  <div class="calendar-content-area">
+    <center>
+  <h2 style="color: #2c3e50; font-size: 20px;"> الأختبار البعدي</h2>
+</center>
+
+
+    <div id="goal-content" class="calendar-content-box" style="display: none;">
+      <p><strong>الهدف من الاختبار:</strong></p>
+      <p>يهدف الاختبار الحالي إلى قياس الجوانب المعرفية المتعلقة بمهارات دمج التكنولوجيا في التعليم لدى أفراد عينة البحث.</p>
+    </div>
+
+    <div id="structure-content" class="calendar-content-box" style="display: none;">
+      <p><strong>بناء الاختبار:</strong></p>
+      <p>يتكون من (80) مفردة:</p>
+      <ul>
+        <li>(51) اختيار من متعدد، لكل منها رأس وأربعة بدائل بينها بديل صحيح.</li>
+        <li>(29) صواب وخطأ، مع وضع (√) إذا صحيحة أو (×) إذا خاطئة.</li>
+      </ul>
+    </div>
+
+    <div id="instructions-content" class="calendar-content-box small-text-instructions" style="display: none;">
+      <p><strong>عزيزي المتدرب :</strong></p>
+      <ul>
+        <li> اقرأ كل مفردة من مفردات التقويم بدقة وعناية فائقة قبل بدء الإجابة.</li>
+        <li> لا تترك آية مفردة دون إجابة، بل اجتهد في التفكير في الحل.</li>
+        <li> لا تتسرع في الإجابة، فالزمن القليل ليس معيارا لتفوقك، وإنما المعيار هي الدرجة التي تحصل عليها.</li>
+        <li> المفردات من نوع الاختيار من متعدد، والصواب والخطأ.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- زر بدء الاختبار في الأسفل -->
+<div class="start-button-fixed">
+  <button onclick="loadTabContent('calendar1')">بدأ الأختبار</button>
+</div>
+      `;
+    }  
+    //المحتوي
+    else if (tabName === 'content') {
+  document.getElementById('content-area').innerHTML = `
+    <style>
+  .two-column-section {
+    display: flex;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 10px;
+    direction: rtl; /* لجعل النص في النصف الأيمن */
+  }
+
+  .bullet-list {
+    flex: 1;
+    font-size: 15px;
+    color: #333;
+  }
+
+  .bullet-list ul {
+    list-style: disc;
+    padding-right: 20px;
+  }
+
+  .bullet-list li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .buttons-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .module-button {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  .module-button:hover:not([disabled]) {
+    color: #0056b3;
+  }
+  .module-button:disabled {
+    color: #999;
+    cursor: default;
+    opacity: 0.7;
+  }
+</style>
+
+<div class="two-column-section">
+  <!-- النصف الأيمن للقائمة النقطية -->
+  <div class="bullet-list">
+    <ul>
+     <li> يتناول المحتوى التعليمي للبيئة مهارات دمج التكنولوجيا في التعليم التي لابد من توظيفها التوظيف الأمثل داخل العملية التعليمية.
+        لتطوير محتوى المناهج وأساليب التدريس.
+     ولكي يعزز من تصميم الدروس التفاعلية.
+     ويمكنا القول أن الهدف  العام من دراسة المحتوي التعليمي : تمكين المتدربين من اختيار وتوظيف ودمج مهارات التكنولوجيا في التعليم بفعالية.
+     <li> لكي تدخل على دروس الموديول ...يجب أولا أن تقوم بحل التقويم القبلي والضغط على تسليم
+    </ul>
+  </div>
+
+  <!-- النصف الأيسر للأزرار -->
+  <div class="buttons-column">
+    <button onclick="window.location.href='questions.html'" class="module-button">
+      📘 الموديول الأول
+    </button>
+
+    <button disabled id="module2" class="module-button">
+      📕 الموديول الثاني
+    </button>
+
+    <button disabled id="module3" class="module-button">
+      📙 الموديول الثالث
+    </button>
+
+    <button disabled id="module4" class="module-button">
+      📗 الموديول الرابع
+    </button>
+  </div>
+</div>
+
+  `;
+
+
+
+  // 🔓 تفعيل الأزرار من localStorage إذا كانت مفعلة
+  for (let i = 2; i <= 4; i++) {
+    if (localStorage.getItem('module' + i + '_enabled') === 'true') {
+      const btn = document.getElementById('module' + i);
+      btn.disabled = false;
+      btn.style.backgroundColor = '#3f51b5';
+      btn.style.color = 'white';
+      btn.style.cursor = 'pointer';
+      btn.onclick = function () {
+        window.location.href = 'module' + i + '.html';
+      };
+    }
+  }
+}
+
+ else if (tabName === 'contact') {
+  document.getElementById('content-area').innerHTML = `
+    <div class="contact-section">
+  <div class="contact-info">
+    <h3>نبذة عن الباحث</h3>
+    <div class="contact-card"><strong>👩‍🏫 الباحثة:</strong> خلود جمال أبوبكر</div>
+    <div class="contact-card"><strong>📞 الهاتف:</strong> <a href="tel:01208085213">01208085213</a></div>
+    <div class="contact-card"><strong>✉️ البريد الإلكتروني:</strong> <a href="mailto:kholoudgamal209@gmail.com">kholoudgamal209@gmail.com</a></div>
+  </div>
+  <div class="contact-image">
+    <img src="Photo/dkhlod.jfif" alt="صورة الباحثة">
+  </div>
+</div>
+  `;
+}
+
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchGuideLink();
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const t = btn.dataset.tab;
+        btn.classList.add('active');
+        loadTabContent(t);
+      });
+    });
+
+    document.getElementById('logout').addEventListener('click', () => {
+      localStorage.removeItem('currentUser');
+      window.location.href = 'index.html';
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+  fetchGuideLink();
+
+  // معالجة الضغط على التبويبات
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tab;
+      loadTabContent(t);
+    });
+  });
+
+  // NEW: عند فتح الصفحة اقرأ الـ hash واعرض المحتوى
+  const hash = window.location.hash.slice(1); // يحذف #
+  if (hash) {
+    loadTabContent(hash);
+    // لو عندك أزرار للتبويبات وتريد تلوين النشط
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      if (btn.dataset.tab === hash) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+});
+//--------------------------------------
+function toggleContent(id) {
+  var content = document.getElementById(id);
+  if (content.style.display === "none" || content.style.display === "") {
+    // إخفاء باقي الصناديق
+    document.querySelectorAll('.calendar-content-box').forEach(function(box){
+      box.style.display = "none";
+    });
+    content.style.display = "block";
+  } else {
+    content.style.display = "none";
+  }
+}
+</script>
+
+
+
+</body>
+</html>
