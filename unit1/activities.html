@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>صفحة الأنشطة التفاعلية</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9fb;
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #4a00e0;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4a00e0;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #3800b0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eee;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .progress-icons span {
+            font-size: 22px;
+            margin-left: 8px;
+            opacity: 0.3;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .progress-icons .active {
+            opacity: 1;
+            color: green;
+        }
+        .progress-icons .gold {
+            color: goldenrod;
+        }
+        .progress-icons .trophy {
+            color: #d39e00;
+        }
+        #activity-area {
+            text-align: center;
+            margin-top: 20px;
+        }
+        /*النشاط الأول*/
+        .draggable {
+  background: #fff;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #aaa;
+  cursor: grab;
+  color: #000;
+  font-weight: bold;
+}
+
+
+.dropzone {
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+    </style>
+</head>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>نشاط تفاعلي</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0077aa;
+      color: #fff;
+      padding: 10px 20px;
+    }
+
+    .progress-icons img {
+      height: 30px;
+      margin-left: 10px;
+    }
+
+    #form-container {
+      text-align: center;
+      padding: 50px;
+    }
+
+    input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 80%;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .dropzone {
+      min-height: 150px;
+      padding: 10px;
+      border: 2px dashed #555;
+      margin: 3px;
+    }
+
+    .draggable {
+      background: #fff;
+      padding: 10px;
+      margin: 3px;
+      border: 1px solid #aaa;
+      cursor: grab;
+    }
+
+    #submit-button {
+  display: none;
+  margin-top: 20px;
+  padding: 8px 12px; /* اصغر قليلاً ليكون فقط حول النص */
+  font-size: 18px;
+  width: auto;       /* يجعل الزر على قدر النص تمامًا */
+  white-space: nowrap; /* يمنع النص من الانكسار للسطر التالي */
+}
+
+
+  </style>
+</head>
+<body>
+
+<!-- ✅ الشريط العلوي -->
+<div class="top-bar" id="top-bar" style="display: none;">
+  <div id="user-name">👤 </div>
+  <div>النتيجة: <span id="score">0</span></div>
+  <div class="progress-icons">
+    <img id="check" src="✔️" style="display: none;" />
+    <img id="gold" src="✔️" style="display: none;" />
+    <img id="trophy" src="🏆" style="display: none;" />
+    <img id="badge-image" style="display: none;" />
+  </div>
+</div>
+
+<!-- ✅ النموذج -->
+<div class="container" id="form-container">
+  <h2>تسجيل الدخول</h2>
+  <input type="text" id="name" placeholder="الاسم" required />
+  <input type="email" id="email" placeholder="البريد الإلكتروني" required />
+  <button onclick="submitForm()">دخول</button>
+</div>
+
+<!-- ✅ النافذة المنبثقة -->
+<div class="modal" id="readyModal" style="display: none;">
+  <div class="modal-content">
+    <h3>هل أنت جاهز لبدء النشاط؟</h3>
+    <button onclick="startActivity()">نعم، لنبدأ</button>
+  </div>
+</div>
+
+
+
+<!-- ✅ مساحة النشاط -->
+<div id="activity-area" style="padding: 20px;"></div>
+
+<!-- ✅ زر تسليم -->
+<div style="text-align:center;">
+  <button id="submit-button" onclick="submitAnswers()">تسليم</button>
+</div>
+
+<script>
+const supabaseUrl = 'https://duxdtpkxomkjoxnlzjgw.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1eGR0cGt4b21ram94bmx6amd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5MTYyMzIsImV4cCI6MjA2NzQ5MjIzMn0._MOyOhSQvvKrmEwAJGvibp79JXM9MlTJyEVnpvuTJL0'; // قصرت المفتاح هنا
+const { createClient } = supabase;
+const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+const badges = {
+  6: { url: "https://duxdtpkxomkjoxnlzjgw.supabase.co/storage/v1/object/public/photo/cup/cup.png",
+    field: "check_mark"},
+
+  4: { url: "https://duxdtpkxomkjoxnlzjgw.supabase.co/storage/v1/object/public/photo/Rightgolden/Rightgolden.png",
+    field: "gold_check" },
+
+  2: { url: "https://duxdtpkxomkjoxnlzjgw.supabase.co/storage/v1/object/public/photo/correct/correct.png",
+    field: "trophy" }
+};
+
+let currentUser = {};
+let score = 0;
+let countdown;
+
+// ✅ دالة التسجيل
+function submitForm() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const lesson = "نشاط الدرس الأول -- الوحدة الأولى";
+
+  if (!name || !email || !/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+    return alert("خطأ لا يوجد بريد بهذا العنوان ");
+  }
+
+  // ✅ فقط نحفظ البيانات في المتغير الحالي ولا نرسل شيء لقاعدة البيانات
+  currentUser = { name, email, lesson };
+  document.getElementById("form-container").style.display = "none";
+  document.getElementById("readyModal").style.display = "flex";
+}
+
+// ✅ بدء النشاط
+function startActivity() {
+  document.getElementById("readyModal").style.display = "none";
+  document.getElementById("submit-button").style.display = "inline-block";
+  document.getElementById("top-bar").style.display = "flex";
+  document.getElementById("user-name").innerText = `👤 ${currentUser.name}`;
+  document.getElementById("score").innerText = score;
+
+  document.getElementById("activity-area").innerHTML = `
+<br>
+
+  <!-- ✅ صندوق النص العلوي -->
+<div style="
+  border: 1px solid black;
+  background-color: white;
+  padding: 10px;
+  font-size: 17px;
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin: 0 auto 0px auto;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+">
+ تسعى متطلبات دمج التكنولوجيا في التعليم إلى توفير بيئة تقنية موصولة محليًا وعالميًا تتيح للمتدربين استخدام أدوات رقمية وتعلم تفاعلي.
+وتهدف هذه العملية إلى تقديم محتوى معاصر يدعم اكتساب الكفايات الرقمية والتواصلية لدى المتدربين  لتلبية احتياجات سوق العمل.
+كما تسهم في تطوير الموارد البشرية وتعزيز التفكير النقدي لدى المتعلمين، مما يرفع جودة التحصيل والتنافس داخل الصف.
+
+</div>
+
+<!-- ✅ النشاط -->
+<div style="display:flex; gap: 40px; align-items: flex-start; margin-right: 200px;">
+
+  <!-- ✅ البطاقات القابلة للسحب -->
+<div id="options" style="width: 25%;">
+  <div class="draggable" draggable="true" data-category="أهمية" style="margin-bottom: 5px; background-color: #d1e7ff; padding: 8px; border-radius: 8px; cursor: grab;">بث روح التحدي</div>
+  
+  <div class="draggable" draggable="true" data-category="أهداف" style="margin-bottom: 5px; background-color: #d1e7ff; padding: 8px; border-radius: 8px; cursor: grab;">تطوير المناهج</div>
+  
+  <div class="draggable" draggable="true" data-category="متطلبات" style="margin-bottom: 5px; background-color: #d1e7ff; padding: 8px; border-radius: 8px; cursor: grab;">توفير مختبرات</div>
+  
+  <div class="draggable" draggable="true" data-category="أهمية" style="margin-bottom: 5px; background-color: #d1e7ff; padding: 8px; border-radius: 8px; cursor: grab;">تنمية بعض المهارات</div>
+  
+  <div class="draggable" draggable="true" data-category="متطلبات" style="margin-bottom: 5px; background-color: #d1e7ff; padding: 8px; border-radius: 8px; cursor: grab;">تكثيف الاستثمار في دمج</div>
+  
+  <div class="draggable" draggable="true" data-category="متطلبات" style="margin-bottom: 5px; background-color: #d1e7ff; padding: 8px; border-radius: 8px; cursor: grab;">توفير المناهج التعليمية</div>
+</div>
+
+
+  <!-- ✅ مناطق الإفلات -->
+  <div style="display:flex; gap: 20px;">
+    <div class="dropzone" data-accept="أهمية">أهمية دمج التكنولوجيا</div>
+    <div class="dropzone" data-accept="أهداف">أهداف دمج التكنولوجيا</div>
+    <div class="dropzone" data-accept="متطلبات">متطلبات دمج التكنولوجيا</div>
+  </div>
+
+</div>
+
+
+
+  
+  `;
+
+  startDragAndDrop();
+}
+
+// ✅ السحب والإفلات
+function startDragAndDrop() {
+  const draggables = document.querySelectorAll('.draggable');
+  const dropzones = document.querySelectorAll('.dropzone');
+
+  draggables.forEach(el => {
+    el.addEventListener('dragstart', e => {
+      e.dataTransfer.setData("text", el.getAttribute("data-category"));
+      e.dataTransfer.setData("text/html", el.outerHTML);
+      setTimeout(() => el.style.display = "none", 0);
+    });
+
+    el.addEventListener('dragend', e => {
+      el.style.display = "block";
+    });
+  });
+
+  dropzones.forEach(zone => {
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      zone.style.background = "#eee";
+    });
+
+    zone.addEventListener('dragleave', e => {
+      zone.style.background = "";
+    });
+
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.style.background = "";
+
+      const cat = e.dataTransfer.getData("text");
+      const expected = zone.getAttribute("data-accept"); // ✅ نتحقق من الفئة المتوقعة
+
+      const html = e.dataTransfer.getData("text/html");
+      const div = document.createElement("div");
+      div.innerHTML = html;
+      div.firstChild.style.display = "block";
+
+      // حذف العنصر من القائمة
+      document.querySelectorAll('.draggable').forEach(el => {
+        if (el.innerText === div.firstChild.innerText) el.remove();
+      });
+
+      // إضافته إلى منطقة الإسقاط
+      zone.appendChild(div.firstChild);
+    });
+  });
+}
+
+
+
+// ✅ التقييم عند تسليم
+function submitAnswers() {
+  clearInterval(countdown);
+  let correct = 0;
+
+  document.querySelectorAll('.dropzone').forEach(zone => {
+    const expected = zone.getAttribute("data-accept");
+    zone.querySelectorAll('.draggable').forEach(item => {
+      if (item.getAttribute("data-category") === expected) correct++;
+    });
+  });
+
+  score = correct;
+  document.getElementById("score").innerText = score;
+
+  // ✅ تحديد الشارة
+  let badge = null;
+  if (score === 6) badge = badges[6];
+  else if (score >= 4) badge = badges[4];
+  else if (score >= 2) badge = badges[2];
+
+  // ✅ عرض صورة الشارة إن وُجدت
+  if (badge) {
+    const badgeImg = document.getElementById("badge-image");
+    badgeImg.src = badge.url;
+    badgeImg.style.display = "inline";
+  }
+
+  // ✅ حفظ النتيجة النهائية عبر الدالة الموحدة
+  saveFinalResult(score, badge);
+
+  // ✅ عرض الخيارات التالية
+  showNextOptions();
+}
+
+
+function showNextOptions() {
+  // إنشاء صندوق الخيارات
+  const optionsContainer = document.createElement('div');
+  optionsContainer.style.textAlign = "center";
+  optionsContainer.style.marginTop = "20px";
+
+  const leaderboardBtn = document.createElement('button');
+  leaderboardBtn.innerHTML = '🏆 قائمة المتصدرين';
+  leaderboardBtn.style.cssText = `
+    padding: 10px 20px; 
+    margin: 10px; 
+    background: #4a00e0; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 14px; 
+    cursor: pointer;
+  `;
+  leaderboardBtn.onclick = () => {
+    window.location.href = "ranking.html";
+  };
+
+  const evaluationBtn = document.createElement('button');
+  evaluationBtn.innerHTML = 'المتابعة إلى التقويم الذاتي';
+  evaluationBtn.style.cssText = `
+    padding: 10px 20px; 
+    margin: 10px; 
+    background: #00796b; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 14px; 
+    cursor: pointer;
+  `;
+  evaluationBtn.onclick = () => {
+    window.location.href = "https://educationalenvironment.github.io/Educational-environment2/unit1/Self-evaluation.html";
+  };
+
+  optionsContainer.appendChild(leaderboardBtn);
+  optionsContainer.appendChild(evaluationBtn);
+
+  // وضعهم في الصفحة بعد النتيجة أو الشارة
+  const badgeImage = document.getElementById("badge-image");
+  badgeImage.parentElement.appendChild(optionsContainer);
+}
+
+
+// ✅ حفظ الشارة
+async function saveFinalResult(score, badge) {
+  const data = {
+    name: currentUser.name,
+    email: currentUser.email,
+    lesson: currentUser.lesson,
+    score: score
+  };
+
+  // أضف الحقل المناسب حسب الشارة
+  if (badge) {
+    data[badge.field] = badge.url;
+  }
+
+  await supabaseClient.from('activities_results').insert([data]);
+}
+///ممممممممممممممممممممممممممممممممممممممممم
+
+function showFeedback(type) {
+  const feedback = document.getElementById("feedback");
+  const image = document.getElementById("feedback-image");
+  image.src = type === "correct"
+    ? "https://cdn-icons-png.flaticon.com/512/845/845646.png" // ✅ صورة صح
+    : "https://cdn-icons-png.flaticon.com/512/463/463612.png"; // ❌ صورة خطأ
+  feedback.style.display = "block";
+  setTimeout(() => feedback.style.display = "none", 1000);
+}
+
+//------------------------------------------------------------
+ 
+</script>
+
+<!-- ✅ مكتبة Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</body>
+</html>
+
